@@ -143,8 +143,8 @@ void SortingSimulations::performSelectionSortDescending(int newSize, int& countS
 	performSelectionSortDescending(newSize - 1, countSwaps);
 }
 
-//precondition:
-//postcondition:
+//precondition: going to pass in two parameters which are the size and the swaps to keep track
+//postcondition: going to then return the insertion sort in ascending and count the swaps (will check if the min index is smaller than the index before and if it is then keep swapping till it is smaller and not greater than the index that is next)
 void SortingSimulations::performInsertionSortAscending(int newSize, int& countSwaps){
 	//base case saying its sorted
 	if (newSize <= 1) {
@@ -170,8 +170,8 @@ void SortingSimulations::performInsertionSortAscending(int newSize, int& countSw
 	//need to a reduced the dynamic array size by 1
 	performInsertionSortAscending(newSize - 1,countSwaps);
 }
-//precondition:
-//postcondition:
+//precondition: going to pass in two parameters which are the size and the swaps to keep track
+//postcondition: going to then return the insertion sort in ascending and count the swaps (will check if the max index is greater than the index before and if it is then keep swapping till it is greater and not smaller than the index that is next)
 void SortingSimulations::performInsertionSortDescending(int newSize, int& countSwaps){
 	//base case saying its sorted
 	if (newSize <= 1) {
