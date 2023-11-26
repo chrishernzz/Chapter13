@@ -31,9 +31,15 @@ void SortingSimulations::orginalArray() {
 //precondition: going to show the output
 //postcondition: going to then return the data which holds the random element
 void SortingSimulations::displayArray() {
+	//will round to the first decimal place
+	cout << fixed << setprecision(1);  
 	cout << "\n\t\t";
 	for (double i = 0; i < size; i++) {
-		cout << data[i] << " ";
+		cout << data[i];
+		//adding comma except the last one
+		if (i < size - 1) {
+			cout << ", ";
+		}
 	}
 }
 
