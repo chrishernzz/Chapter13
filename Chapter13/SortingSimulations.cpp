@@ -11,7 +11,7 @@ void SortingSimulations::createArray(int newSize) {
 	//for loop through the newSize which is the user enter
 	for (int i = 0; i < newSize; ++i) {
 		//this will let me store the random numbers in both data and realData
-		int randDoubles = rand() % 100;
+		double randDoubles = static_cast<double>(rand()) / RAND_MAX * 100.0;
 		//you will now push back (append) the random elements
 		data.push_back(randDoubles);
 		//this will hold a copy of the random elements 
