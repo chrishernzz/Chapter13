@@ -1,21 +1,35 @@
 #include "SortingSimulations.h"
 
+//precondition: going to call the default constructor class
+//postcondition: going to then initialize the privates 
 SortingSimulations::SortingSimulations() : size(0.0) {}
 
-//precondition:
-//postcondition:
+//precondition: going to pass in a parameter
+//postcondition: the parameter is going to then be used for the for loop, going to return the data and realData which are the dynamic array
 void SortingSimulations::createArray(int newSize) {
 	srand(time(0));
 	//for loop through the newSize which is the user enter
 	for (int i = 0; i < newSize; ++i) {
+		//this will let me store the random numbers in both data and realData
+		int randDoubles = rand() % 100;
 		//you will now push back (append) the random elements
-		data.push_back(rand() % 100);
+		data.push_back(randDoubles);
+		//this will hold a copy of the random elements 
+		realData.push_back(randDoubles);
 	}
 	//set the size to the vector data size which holds the random elements
 	size = data.size();
 }
-//precondition:
-//postcondition:
+//precondition: going to keep track of the data
+//postcondition: going to then return the random elements we started with from when we created the size of the array elements
+void SortingSimulations::orginalArray() {
+	//set the data to realData as where realData has the elements that we first started with
+	data = realData;
+	//set the size as well
+	size = data.size();
+}
+//precondition: going to show the output
+//postcondition: going to then return the data which holds the random element
 void SortingSimulations::displayArray() {
 	cout << "\n\t\t";
 	for (double i = 0; i < size; i++) {
@@ -23,8 +37,8 @@ void SortingSimulations::displayArray() {
 	}
 }
 
-//precondition:
-//postcondition:
+//precondition: going to pass in two parameters which are the size and the swaps to keep track
+//postcondition: going to then return the bubble sort in ascending and the count swaps
 void SortingSimulations::performBubbleSortAscending(int newSize, int countSwaps) {
 	//base case saying it is sorted
 	if (newSize == 1) {
@@ -34,31 +48,35 @@ void SortingSimulations::performBubbleSortAscending(int newSize, int countSwaps)
 	//using the bubble sort ascending method (ascending first)
 	for (int i = 0; i < newSize - 1; ++i) {
 		if (data[i] > data[i + 1]) {
+			//increment the count swaps
 			++countSwaps;
 			// Swap data[i] and data[i + 1]
+			//built in function
 			swap(data[i], data[i + 1]);
 		}
 	}
 	//with reduced array size
 	performBubbleSortAscending(newSize - 1, countSwaps);
 }
-//precondition:
-//postcondition:
+//precondition: going to pass in two parameters which are the size and the swaps to keep track
+//postcondition: going to then return the bubble sort in descending and the count swaps
 void SortingSimulations::performBubbleSortDescending(int newSize, int countSwaps) {
 	//base case saying it is sorted
 	if (newSize == 1) {
 		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
 		return;
 	}
-	//using the bubble sort ascending method (ascending first)
+	//using the bubble sort descending method (descending second)
 	for (int i = 0; i < newSize - 1; ++i) {
 		if (data[i] < data[i + 1]) {
+			//increment the count swaps
 			++countSwaps;
 			// Swap data[i] and data[i + 1]
+			//built in function
 			swap(data[i], data[i + 1]);
 		}
 	}
-	//with reduced array size
+	//need to reduced the dynamic array size by 1 
 	performBubbleSortDescending(newSize - 1, countSwaps);
 }
 
@@ -69,7 +87,7 @@ void SortingSimulations::mainInformation() {
 	system("cls");
 	char choice;
 	do {
-		beginning:
+	beginning:
 		cout << "\n\t1> Sort Simulations";
 		cout << "\n\t" << string(82, char(205));
 		cout << "\n\t\tA> Create a dynamic array and fill with random elements";
@@ -111,7 +129,6 @@ void SortingSimulations::mainInformation() {
 		}
 				break;
 		case 'C': {
-			int countSwaps = 0;
 			//check if the dynamic array is empty
 			if (data.empty()) {
 				cout << "\n\t\tDynamic array is empty.";
@@ -120,23 +137,23 @@ void SortingSimulations::mainInformation() {
 				system("cls");
 				goto beginning;
 			}
-			else {
-				cout << "\n\t\tBubbleSort:\n";
-				char orderChoice = inputChar("\n\t\tChoose sort in (A)scending or (D)escending order: ", static_cast<string>("AD"));
-				if (toupper(orderChoice) == 'A') {
-					cout << "\n\t\tAscending:\t\t";
-					performBubbleSortAscending(size, countSwaps);
-					//cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
-					//call my displayArray() to show the ascending sorted
-					displayArray();
-				}
-				else {
-					cout << "\n\t\tDescending:\t\t";
-					performBubbleSortDescending(size, countSwaps);
-					//call my displayArray() to show the descending sorted
-					displayArray();
-				}
+			int countSwaps = 0;
+			cout << "\n\t\tBubbleSort:\n";
+			char orderChoice = inputChar("\n\t\tChoose sort in (A)scending or (D)escending order: ", static_cast<string>("AD"));
+			if (toupper(orderChoice) == 'A') {
+				cout << "\n\t\tAscending:\t\t";
+				//call my displayArray() to show the ascending sorted
+				performBubbleSortAscending(size, countSwaps);
+				displayArray();
 			}
+			else {
+				cout << "\n\t\tDescending:\t\t";
+				performBubbleSortDescending(size, countSwaps);
+				//call my displayArray() to show the descending sorted
+				displayArray();
+			}
+			//going to then reset the ascending or descending back to their original data which are the random elements we started with
+			orginalArray();
 			cout << "\n\n";
 			system("pause");
 			system("cls");
