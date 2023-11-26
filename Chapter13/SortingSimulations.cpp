@@ -80,6 +80,59 @@ void SortingSimulations::performBubbleSortDescending(int newSize, int countSwaps
 	performBubbleSortDescending(newSize - 1, countSwaps);
 }
 
+//precondition: going to pass in two parameters which are the size and the swaps to keep track
+//postcondition: going to then return the selection sort in ascending and count the swaps (will grab the min and the max and swap them right away)
+void SortingSimulations::performSelectionSortAscending(int newSize, int countSwaps){
+	//base case saying it is sorted
+	if (newSize <= 1) {
+		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
+		return;
+	}
+	int minIndex, minValue;
+	for (int i = 0; i < newSize - 1; i++) {
+		minIndex = i;
+		minValue = data[i];
+		for (int j = i + 1; j < newSize; j++) {
+			if (data[j] < minValue) {
+				minValue = data[j];
+				minIndex = j;
+			}
+		}
+		if (minIndex != i) {
+			++countSwaps;
+			swap(data[minIndex], data[i]);
+		}
+	}
+	//need to a reduced the dynamic array size by 1
+	performSelectionSortAscending(newSize - 1, countSwaps);
+}
+//precondition: going to pass in two parameters which are the size and the swaps to keep track
+//postcondition: going to then return the selection sort in descending and count the swaps (will grab the max and the min and swap them right away)
+void SortingSimulations::performSelectionSortDescending(int newSize, int countSwaps){
+	//base case saying it is sorted
+	if (newSize <= 1) {
+		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
+		return;
+	}
+	int minIndex, minValue;
+	for (int i = 0; i < newSize - 1; i++) {
+		minIndex = i;
+		minValue = data[i];
+		for (int j = i + 1; j < newSize; j++) {
+			if (data[j] > minValue) {
+				minValue = data[j];
+				minIndex = j;
+			}
+		}
+		if (minIndex != i) {
+			++countSwaps;
+			swap(data[minIndex], data[i]);
+		}
+	}
+	//need to a reduced the dynamic array size by 1
+	performSelectionSortDescending(newSize - 1, countSwaps);
+}
+
 
 //precondition: going to print the information
 //postcondition: going to create a menu that has options 
@@ -160,7 +213,34 @@ void SortingSimulations::mainInformation() {
 		}
 				break;
 		case 'D': {
-
+			//check if the dynamic array is empty
+			if (data.empty()) {
+				cout << "\n\t\tDynamic array is empty.";
+				cout << "\n\n";
+				system("pause");
+				system("cls");
+				goto beginning;
+			}
+			int countSwaps = 0;
+			cout << "\n\t\tSelectionSort:\n";
+			char orderChoice = inputChar("\n\t\tChoose sort in (A)scending or (D)escending order: ", static_cast<string>("AD"));
+			if (toupper(orderChoice) == 'A') {
+				cout << "\n\t\tAscending:\t\t";
+				//call my displayArray() to show the ascending sorted
+				performSelectionSortAscending(size, countSwaps);
+				displayArray();
+			}
+			else {
+				cout << "\n\t\tDescending:\t\t";
+				performSelectionSortDescending(size, countSwaps);
+				//call my displayArray() to show the descending sorted
+				displayArray();
+			}
+			//going to then reset the ascending or descending back to their original data which are the random elements we started with
+			orginalArray();
+			cout << "\n\n";
+			system("pause");
+			system("cls");
 		}
 				break;
 		case 'E': {

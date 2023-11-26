@@ -31,6 +31,12 @@ public:
 	void performBubbleSortAscending(int newSize,int countSwaps);
 	void performBubbleSortDescending(int newSize, int countSwaps);
 
+	//member function to perform selection sort (ascending or descending)
+	void performSelectionSortAscending(int newSize, int countSwaps);
+	void performSelectionSortDescending(int newSize, int countSwaps);
+
+
+
 	//main menu information
 	void mainInformation();
 
