@@ -39,7 +39,7 @@ void SortingSimulations::displayArray() {
 
 //precondition: going to pass in two parameters which are the size and the swaps to keep track
 //postcondition: going to then return the bubble sort in ascending and the count swaps
-void SortingSimulations::performBubbleSortAscending(int newSize, int countSwaps) {
+void SortingSimulations::performBubbleSortAscending(int newSize, int& countSwaps) {
 	//base case saying it is sorted
 	if (newSize == 1) {
 		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
@@ -60,7 +60,7 @@ void SortingSimulations::performBubbleSortAscending(int newSize, int countSwaps)
 }
 //precondition: going to pass in two parameters which are the size and the swaps to keep track
 //postcondition: going to then return the bubble sort in descending and the count swaps
-void SortingSimulations::performBubbleSortDescending(int newSize, int countSwaps) {
+void SortingSimulations::performBubbleSortDescending(int newSize, int& countSwaps) {
 	//base case saying it is sorted
 	if (newSize == 1) {
 		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
@@ -82,7 +82,7 @@ void SortingSimulations::performBubbleSortDescending(int newSize, int countSwaps
 
 //precondition: going to pass in two parameters which are the size and the swaps to keep track
 //postcondition: going to then return the selection sort in ascending and count the swaps (will grab the min and the max and swap them right away)
-void SortingSimulations::performSelectionSortAscending(int newSize, int countSwaps){
+void SortingSimulations::performSelectionSortAscending(int newSize, int& countSwaps){
 	//base case saying it is sorted
 	if (newSize <= 1) {
 		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
@@ -108,7 +108,7 @@ void SortingSimulations::performSelectionSortAscending(int newSize, int countSwa
 }
 //precondition: going to pass in two parameters which are the size and the swaps to keep track
 //postcondition: going to then return the selection sort in descending and count the swaps (will grab the max and the min and swap them right away)
-void SortingSimulations::performSelectionSortDescending(int newSize, int countSwaps){
+void SortingSimulations::performSelectionSortDescending(int newSize, int& countSwaps){
 	//base case saying it is sorted
 	if (newSize <= 1) {
 		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
