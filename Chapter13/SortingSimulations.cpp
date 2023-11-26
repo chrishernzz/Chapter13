@@ -38,7 +38,7 @@ void SortingSimulations::displayArray() {
 }
 
 //precondition: going to pass in two parameters which are the size and the swaps to keep track
-//postcondition: going to then return the bubble sort in ascending and the count swaps
+//postcondition: going to then return the bubble sort in ascending and the count swaps (will start at the first index and compare to the next index. if the first index greater than second index swap. does this till sorted ascending)
 void SortingSimulations::performBubbleSortAscending(int newSize, int& countSwaps) {
 	//base case saying it is sorted
 	if (newSize == 1) {
@@ -59,7 +59,7 @@ void SortingSimulations::performBubbleSortAscending(int newSize, int& countSwaps
 	performBubbleSortAscending(newSize - 1, countSwaps);
 }
 //precondition: going to pass in two parameters which are the size and the swaps to keep track
-//postcondition: going to then return the bubble sort in descending and the count swaps
+//postcondition: going to then return the bubble sort in descending and the count swaps (will start at the first index and compare to the next index. if the first index less than the second index swap. does this till sorted descending)
 void SortingSimulations::performBubbleSortDescending(int newSize, int& countSwaps) {
 	//base case saying it is sorted
 	if (newSize == 1) {
@@ -68,6 +68,7 @@ void SortingSimulations::performBubbleSortDescending(int newSize, int& countSwap
 	}
 	//using the bubble sort descending method (descending second)
 	for (int i = 0; i < newSize - 1; ++i) {
+		//changing the comparing here to get descending
 		if (data[i] < data[i + 1]) {
 			//increment the count swaps
 			++countSwaps;
@@ -81,23 +82,23 @@ void SortingSimulations::performBubbleSortDescending(int newSize, int& countSwap
 }
 
 //precondition: going to pass in two parameters which are the size and the swaps to keep track
-//postcondition: going to then return the selection sort in ascending and count the swaps (will grab the min and the max and swap them right away)
-void SortingSimulations::performSelectionSortAscending(int newSize, int& countSwaps){
+//postcondition: going to then return the selection sort in ascending and count the swaps (will grab the min and the max and swap them right away. does this till sorted ascending)
+void SortingSimulations::performSelectionSortAscending(int newSize, int& countSwaps) {
 	//base case saying it is sorted
 	if (newSize <= 1) {
 		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
 		return;
 	}
-	int minIndex, minValue;
+	int minIndex;
 	for (int i = 0; i < newSize - 1; i++) {
+		//this will find the min element in the array 
 		minIndex = i;
-		minValue = data[i];
 		for (int j = i + 1; j < newSize; j++) {
-			if (data[j] < minValue) {
-				minValue = data[j];
+			if (data[j] < data[minIndex]) {
 				minIndex = j;
 			}
 		}
+		//swap the found min element with the first element of the index
 		if (minIndex != i) {
 			++countSwaps;
 			swap(data[minIndex], data[i]);
@@ -107,23 +108,24 @@ void SortingSimulations::performSelectionSortAscending(int newSize, int& countSw
 	performSelectionSortAscending(newSize - 1, countSwaps);
 }
 //precondition: going to pass in two parameters which are the size and the swaps to keep track
-//postcondition: going to then return the selection sort in descending and count the swaps (will grab the max and the min and swap them right away)
-void SortingSimulations::performSelectionSortDescending(int newSize, int& countSwaps){
+//postcondition: going to then return the selection sort in descending and count the swaps (will grab the max and the min and swap them right away. does this till sorted descending)
+void SortingSimulations::performSelectionSortDescending(int newSize, int& countSwaps) {
 	//base case saying it is sorted
 	if (newSize <= 1) {
 		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
 		return;
 	}
-	int minIndex, minValue;
+	int minIndex;
 	for (int i = 0; i < newSize - 1; i++) {
+		//this will find the max element in the array 
 		minIndex = i;
-		minValue = data[i];
 		for (int j = i + 1; j < newSize; j++) {
-			if (data[j] > minValue) {
-				minValue = data[j];
+			//changing the comparing here to get descending
+			if (data[j] > data[minIndex]) {
 				minIndex = j;
 			}
 		}
+		//swap the found max element with the first element of the index
 		if (minIndex != i) {
 			++countSwaps;
 			swap(data[minIndex], data[i]);

@@ -21,12 +21,18 @@
     <ClCompile Include="SortingSimulations.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ApplicationStudentRecords.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="input (1).h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SortingSimulations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ApplicationStudentRecords.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

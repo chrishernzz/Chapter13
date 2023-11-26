@@ -127,10 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ApplicationStudentRecords.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SortingSimulations.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ApplicationStudentRecords.h" />
     <ClInclude Include="input (1).h" />
     <ClInclude Include="SortingSimulations.h" />
   </ItemGroup>
