@@ -106,6 +106,7 @@ void SortingSimulations::performSelectionSortAscending(int newSize, int& countSw
 		}
 		//swap the found min element with the first element of the index
 		if (minIndex != i) {
+			//increment the count swaps
 			++countSwaps;
 			swap(data[minIndex], data[i]);
 		}
@@ -133,12 +134,69 @@ void SortingSimulations::performSelectionSortDescending(int newSize, int& countS
 		}
 		//swap the found max element with the first element of the index
 		if (minIndex != i) {
+			//increment the count swaps
 			++countSwaps;
 			swap(data[minIndex], data[i]);
 		}
 	}
 	//need to a reduced the dynamic array size by 1
 	performSelectionSortDescending(newSize - 1, countSwaps);
+}
+
+//precondition:
+//postcondition:
+void SortingSimulations::performInsertionSortAscending(int newSize, int& countSwaps){
+	//base case saying its sorted
+	if (newSize <= 1) {
+		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
+		return;
+	}
+	int key, j;
+	for (int i = 1; i < newSize; i++) {
+		key = data[i];
+		j = i - 1;
+		// Move elements of arr[0..i-1],
+		// that are greater than key, 
+		// to one position ahead of their
+		// current position
+		while (j >= 0 && data[j] > key) {
+			data[j + 1] = data[j];
+			j = j - 1;
+			//increment the count swaps
+			++countSwaps;
+		}
+		data[j + 1] = key;
+	}
+	//need to a reduced the dynamic array size by 1
+	performInsertionSortAscending(newSize - 1,countSwaps);
+}
+//precondition:
+//postcondition:
+void SortingSimulations::performInsertionSortDescending(int newSize, int& countSwaps){
+	//base case saying its sorted
+	if (newSize <= 1) {
+		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
+		return;
+	}
+	int key, j;
+	for (int i = 1; i < newSize; i++) {
+		key = data[i];
+		j = i - 1;
+		// Move elements of arr[0..i-1],
+		// that are greater than key, 
+		// to one position ahead of their
+		// current position
+		//changing the comparing here to get descending
+		while (j >= 0 && data[j] < key) {
+			data[j + 1] = data[j];
+			j = j - 1;
+			//increment the count swaps
+			++countSwaps;
+		}
+		data[j + 1] = key;
+	}
+	//need to a reduced the dynamic array size by 1
+	performInsertionSortDescending(newSize - 1, countSwaps);
 }
 
 
@@ -203,8 +261,8 @@ void SortingSimulations::mainInformation() {
 			char orderChoice = inputChar("\n\t\tChoose sort in (A)scending or (D)escending order: ", static_cast<string>("AD"));
 			if (toupper(orderChoice) == 'A') {
 				cout << "\n\t\tAscending:\t\t";
-				//call my displayArray() to show the ascending sorted
 				performBubbleSortAscending(size, countSwaps);
+				//call my displayArray() to show the ascending sorted
 				displayArray();
 			}
 			else {
@@ -234,8 +292,8 @@ void SortingSimulations::mainInformation() {
 			char orderChoice = inputChar("\n\t\tChoose sort in (A)scending or (D)escending order: ", static_cast<string>("AD"));
 			if (toupper(orderChoice) == 'A') {
 				cout << "\n\t\tAscending:\t\t";
-				//call my displayArray() to show the ascending sorted
 				performSelectionSortAscending(size, countSwaps);
+				//call my displayArray() to show the ascending sorted
 				displayArray();
 			}
 			else {
@@ -252,7 +310,34 @@ void SortingSimulations::mainInformation() {
 		}
 				break;
 		case 'E': {
-
+			//check if the dynamic array is empty
+			if (data.empty()) {
+				cout << "\n\t\tDynamic array is empty.";
+				cout << "\n\n";
+				system("pause");
+				system("cls");
+				goto beginning;
+			}
+			int countSwaps = 0;
+			cout << "\n\t\tInsertionSort:\n";
+			char orderChoice = inputChar("\n\t\tChoose sort in (A)scending or (D)escending order: ", static_cast<string>("AD"));
+			if (toupper(orderChoice) == 'A') {
+				cout << "\n\t\tAscending:\t\t";
+				performInsertionSortAscending(size, countSwaps);
+				//call my displayArray() to show the ascending sorted
+				displayArray();
+			}
+			else {
+				cout << "\n\t\tDescending:\t\t";
+				performInsertionSortDescending(size, countSwaps);
+				//call my displayArray() to show the descending sorted
+				displayArray();
+			}
+			//going to then reset the ascending or descending back to their original data which are the random elements we started with
+			orginalArray();
+			cout << "\n\n";
+			system("pause");
+			system("cls");
 		}
 				break;
 		case 'F': {
