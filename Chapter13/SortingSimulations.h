@@ -13,7 +13,7 @@ private:
 	//int* array;
 	//creating a dynamic array and fill with random elements (double)
 	vector<double> data;
-	//will hold the data that we are creating the random elements from
+	//will hold a copy of the data that we are creating the random elements from
 	vector<double> realData;
 	double size;
 public:
