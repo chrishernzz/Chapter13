@@ -25,8 +25,8 @@ void SortingSimulations::createArray(int newSize) {
 void SortingSimulations::orginalArray() {
 	//set the data to realData as where realData has the elements that we first started with
 	data = realData;
-	//set the size as well
-	size = data.size();
+	//set the size to realData because that will have the size of the elements that we first started with
+	size = realData.size();
 }
 //precondition: going to show the output
 //postcondition: going to then return the data which holds the random element

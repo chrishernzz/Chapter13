@@ -16,7 +16,7 @@ private:
 	vector<double> data;
 	//will hold a copy of the data that we are creating the random elements from
 	vector<double> realData;
-	double size;
+	int size;
 public:
 	//default constructor
 	SortingSimulations();
@@ -36,6 +36,9 @@ public:
 	void performSelectionSortAscending(int newSize, int& countSwaps);
 	void performSelectionSortDescending(int newSize, int& countSwaps);
 
+	//member function to perform insertion sort (ascending or descending)
+	void performInsertionSortAscending(int newSize, int& countSwaps);
+	void performInsertionSortDescending(int newSize, int& countSwaps);
 
 
 	//main menu information
