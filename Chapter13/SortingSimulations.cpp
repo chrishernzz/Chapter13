@@ -26,7 +26,7 @@ void SortingSimulations::orginalArray() {
 	//set the data to realData as where realData has the elements that we first started with
 	data = realData;
 	//set the size to realData because that will have the size of the elements that we first started with
-	size = realData.size();
+	size = data.size();
 }
 //precondition: going to show the output
 //postcondition: going to then return the data which holds the random element
@@ -151,7 +151,7 @@ void SortingSimulations::performInsertionSortAscending(int newSize, int& countSw
 		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
 		return;
 	}
-	int key, j;
+	double key, j;
 	for (int i = 1; i < newSize; i++) {
 		key = data[i];
 		j = i - 1;
@@ -178,7 +178,7 @@ void SortingSimulations::performInsertionSortDescending(int newSize, int& countS
 		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
 		return;
 	}
-	int key, j;
+	double key, j;
 	for (int i = 1; i < newSize; i++) {
 		key = data[i];
 		j = i - 1;
