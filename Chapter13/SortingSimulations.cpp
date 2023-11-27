@@ -193,6 +193,16 @@ void SortingSimulations::performInsertionSortDescending(int newSize, int& countS
 	performInsertionSortDescending(newSize - 1, countSwaps);
 }
 
+//precondition:
+//postcondition:
+void SortingSimulations::performQuickSortAscending(int newSize, int& countSwaps){
+
+}
+//precondition:
+//postcondition:
+void SortingSimulations::performQuickSortDescending(int newSize, int& countSwaps){
+}
+
 
 //precondition: going to print the information
 //postcondition: going to create a menu that has options 

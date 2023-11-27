@@ -39,6 +39,10 @@ public:
 	void performInsertionSortAscending(int newSize, int& countSwaps);
 	void performInsertionSortDescending(int newSize, int& countSwaps);
 
+	//member function to perform quick sort (ascending or descending)
+	void performQuickSortAscending(int newSize, int& countSwaps);
+	void performQuickSortDescending(int newSize, int& countSwaps);
+
 
 	//main menu information
 	void mainInformation();
