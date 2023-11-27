@@ -155,15 +155,12 @@ void SortingSimulations::performInsertionSortAscending(int newSize, int& countSw
 	for (int i = 1; i < newSize; i++) {
 		key = data[i];
 		j = i - 1;
-		// Move elements of arr[0..i-1],
-		// that are greater than key, 
-		// to one position ahead of their
-		// current position
+		//going to move the greater than key position ahead of the current position
 		while (j >= 0 && data[j] > key) {
 			data[j + 1] = data[j];
-			j = j - 1;
 			//increment the count swaps
 			++countSwaps;
+			j = j - 1;
 		}
 		data[j + 1] = key;
 	}
@@ -182,10 +179,7 @@ void SortingSimulations::performInsertionSortDescending(int newSize, int& countS
 	for (int i = 1; i < newSize; i++) {
 		key = data[i];
 		j = i - 1;
-		// Move elements of arr[0..i-1],
-		// that are greater than key, 
-		// to one position ahead of their
-		// current position
+		//going to move the greater than key position ahead of the current position
 		//changing the comparing here to get descending
 		while (j >= 0 && data[j] < key) {
 			data[j + 1] = data[j];
