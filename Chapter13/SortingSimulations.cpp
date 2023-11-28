@@ -196,7 +196,48 @@ void SortingSimulations::performInsertionSortDescending(int newSize, int& countS
 //precondition:
 //postcondition:
 void SortingSimulations::performQuickSortAscending(int newSize, int& countSwaps){
+	countSwaps = 0;
+	quickSortAscending(0, newSize - 1, countSwaps);
+}
+//precondition:
+//postcondition:
+void SortingSimulations::quickSortAscending(int low, int high, int& countSwaps){
+	//base case saying its sorted
+	/*if (low > high) {
+		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
+		return;
+	}*/
+	// when low is less than high
+	if (low < high){
+		// pi is the partition return index of pivot
+		int pi = partionTheAscending(low, high, countSwaps);
 
+		//smaller element than pivot goes left and
+		//higher element goes right
+		quickSortAscending(low, pi - 1,countSwaps);
+		quickSortAscending(pi + 1, high, countSwaps);
+	}
+}
+//precondition:
+//postcondition:
+int SortingSimulations::partionTheAscending(int low, int high, int& countSwaps){
+	//choose the pivot
+	int pivot = data[high];
+	//index of smaller element and indicate
+	//the right position of pivot found so far
+	int i = (low - 1);
+	for (int j = low; j <= high; j++){
+		//if current element is smaller than the pivot
+		if (data[j] < pivot){
+			//increment index of smaller element
+			i++;
+			++countSwaps;
+			swap(data[i], data[j]);
+		}
+	}
+	++countSwaps;
+	swap(data[i + 1], data[high]);
+	return (i + 1);
 }
 //precondition:
 //postcondition:
@@ -345,7 +386,34 @@ void SortingSimulations::mainInformation() {
 		}
 				break;
 		case 'F': {
-
+			//check if the dynamic array is empty
+			if (data.empty()) {
+				cout << "\n\t\tDynamic array is empty.";
+				cout << "\n\n";
+				system("pause");
+				system("cls");
+				goto beginning;
+			}
+			int countSwaps = 0;
+			cout << "\n\t\tQuickSort:\n";
+			char orderChoice = inputChar("\n\t\tChoose sort in (A)scending or (D)escending order: ", static_cast<string>("AD"));
+			if (toupper(orderChoice) == 'A') {
+				cout << "\n\t\tAscending:\t\t";
+				performQuickSortAscending(size, countSwaps);
+				//call my displayArray() to show the ascending sorted
+				displayArray();
+			}
+			else {
+				cout << "\n\t\tDescending:\t\t";
+				performQuickSortDescending(size, countSwaps);
+				//call my displayArray() to show the descending sorted
+				displayArray();
+			}
+			//going to then reset the ascending or descending back to their original data which are the random elements we started with
+			orginalArray();
+			cout << "\n\n";
+			system("pause");
+			system("cls");
 		}
 				break;
 		case 'G': {

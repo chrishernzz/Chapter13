@@ -41,6 +41,9 @@ public:
 
 	//member function to perform quick sort (ascending or descending)
 	void performQuickSortAscending(int newSize, int& countSwaps);
+	void quickSortAscending(int low, int high,int& countSwaps);
+	int partionTheAscending(int low, int high, int& countSwaps);
+
 	void performQuickSortDescending(int newSize, int& countSwaps);
 
 
