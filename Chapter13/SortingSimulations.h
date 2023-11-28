@@ -45,7 +45,8 @@ public:
 	int partionTheAscending(int low, int high, int& countSwaps);
 
 	void performQuickSortDescending(int newSize, int& countSwaps);
-
+	void quickSortDescending(int low, int high, int& countSwaps);
+	int partionTheDescending(int low, int high, int& countSwaps);
 
 	//main menu information
 	void mainInformation();

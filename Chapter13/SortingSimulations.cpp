@@ -193,20 +193,20 @@ void SortingSimulations::performInsertionSortDescending(int newSize, int& countS
 	performInsertionSortDescending(newSize - 1, countSwaps);
 }
 
-//precondition:
-//postcondition:
+//precondition: going to pass in two parameters which are the size and the swaps to keep track
+//postcondition: going to call my quickSortAscending() function that does the recursive
 void SortingSimulations::performQuickSortAscending(int newSize, int& countSwaps){
 	countSwaps = 0;
 	quickSortAscending(0, newSize - 1, countSwaps);
 }
-//precondition:
-//postcondition:
+//precondition: going to pass in three parameters which are the low, high and the swaps to keep track
+//postcondition: going to then check if the low is less than the high if its then call the partionTheAscending() function
 void SortingSimulations::quickSortAscending(int low, int high, int& countSwaps){
 	//base case saying its sorted
-	/*if (low > high) {
+	if (low == high) {
 		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
 		return;
-	}*/
+	}
 	// when low is less than high
 	if (low < high){
 		// pi is the partition return index of pivot
@@ -218,8 +218,8 @@ void SortingSimulations::quickSortAscending(int low, int high, int& countSwaps){
 		quickSortAscending(pi + 1, high, countSwaps);
 	}
 }
-//precondition:
-//postcondition:
+//precondition: going to pass in three parameters which are the low, high and the swaps to keep track
+//postcondition: going to get the pivot and put all the low values that are less than the pivot to the left and greater values to the right
 int SortingSimulations::partionTheAscending(int low, int high, int& countSwaps){
 	//choose the pivot
 	int pivot = data[high];
@@ -241,7 +241,49 @@ int SortingSimulations::partionTheAscending(int low, int high, int& countSwaps){
 }
 //precondition:
 //postcondition:
-void SortingSimulations::performQuickSortDescending(int newSize, int& countSwaps){
+void SortingSimulations::performQuickSortDescending(int newSize, int& countSwaps) {
+	countSwaps = 0;
+	quickSortDescending(0, newSize - 1, countSwaps);
+}
+//precondition:
+//postcondition:
+void SortingSimulations::quickSortDescending(int low, int high, int& countSwaps) {
+	//base case saying it's sorted
+	if (low < high) {
+		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
+		return;
+	}
+	// when low is less than high
+	if (low < high) {
+		// pi is the partition return index of pivot
+		int pi = partionTheDescending(low, high, countSwaps);
+
+		// smaller element than pivot goes right
+		// higher element goes left
+		quickSortDescending(low, pi - 1, countSwaps);
+		quickSortDescending(pi + 1, high, countSwaps);
+	}
+}
+//precondition:
+//postcondition:
+int SortingSimulations::partionTheDescending(int low, int high, int& countSwaps){
+	// choose the pivot
+	int pivot = data[high];
+	// index of smaller element and indicate
+	// the right position of pivot found so far
+	int i = (low - 1);
+	for (int j = low; j <= high; j++){
+		// if current element is greater than the pivot
+		if (data[j] > pivot){
+			// increment index of smaller element
+			i++;
+			++countSwaps;
+			swap(data[i], data[j]);
+		}
+	}
+	++countSwaps;
+	swap(data[i + 1], data[high]);
+	return (i + 1);
 }
 
 
@@ -307,16 +349,14 @@ void SortingSimulations::mainInformation() {
 			if (toupper(orderChoice) == 'A') {
 				cout << "\n\t\tAscending:\t\t";
 				performBubbleSortAscending(size, countSwaps);
-				//call my displayArray() to show the ascending sorted
-				displayArray();
 			}
 			else {
 				cout << "\n\t\tDescending:\t\t";
 				performBubbleSortDescending(size, countSwaps);
-				//call my displayArray() to show the descending sorted
-				displayArray();
 			}
-			//going to then reset the ascending or descending back to their original data which are the random elements we started with
+			//call my displayArray() to show the ascending or descending sorted
+			displayArray();
+			//then reset the ascending or descending back to their original data which are the random elements we started with
 			orginalArray();
 			cout << "\n\n";
 			system("pause");
@@ -338,16 +378,14 @@ void SortingSimulations::mainInformation() {
 			if (toupper(orderChoice) == 'A') {
 				cout << "\n\t\tAscending:\t\t";
 				performSelectionSortAscending(size, countSwaps);
-				//call my displayArray() to show the ascending sorted
-				displayArray();
 			}
 			else {
 				cout << "\n\t\tDescending:\t\t";
 				performSelectionSortDescending(size, countSwaps);
-				//call my displayArray() to show the descending sorted
-				displayArray();
 			}
-			//going to then reset the ascending or descending back to their original data which are the random elements we started with
+			//call my displayArray() to show the ascending or descending sorted
+			displayArray();
+			//then reset the ascending or descending back to their original data which are the random elements we started with
 			orginalArray();
 			cout << "\n\n";
 			system("pause");
@@ -369,16 +407,14 @@ void SortingSimulations::mainInformation() {
 			if (toupper(orderChoice) == 'A') {
 				cout << "\n\t\tAscending:\t\t";
 				performInsertionSortAscending(size, countSwaps);
-				//call my displayArray() to show the ascending sorted
-				displayArray();
 			}
 			else {
 				cout << "\n\t\tDescending:\t\t";
 				performInsertionSortDescending(size, countSwaps);
-				//call my displayArray() to show the descending sorted
-				displayArray();
 			}
-			//going to then reset the ascending or descending back to their original data which are the random elements we started with
+			//call my displayArray() to show the ascending or descending sorted
+			displayArray();
+			//then reset the ascending or descending back to their original data which are the random elements we started with
 			orginalArray();
 			cout << "\n\n";
 			system("pause");
@@ -400,16 +436,14 @@ void SortingSimulations::mainInformation() {
 			if (toupper(orderChoice) == 'A') {
 				cout << "\n\t\tAscending:\t\t";
 				performQuickSortAscending(size, countSwaps);
-				//call my displayArray() to show the ascending sorted
-				displayArray();
 			}
 			else {
 				cout << "\n\t\tDescending:\t\t";
 				performQuickSortDescending(size, countSwaps);
-				//call my displayArray() to show the descending sorted
-				displayArray();
 			}
-			//going to then reset the ascending or descending back to their original data which are the random elements we started with
+			//call my displayArray() to show the ascending or descending sorted
+			displayArray();
+			//then reset the ascending or descending back to their original data which are the random elements we started with
 			orginalArray();
 			cout << "\n\n";
 			system("pause");
