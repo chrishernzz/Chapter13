@@ -44,7 +44,7 @@ void ApplicationStudentRecords::readFromFile(string& fileName){
 void ApplicationStudentRecords::displayRecords(){
 	cout << "\n\t\tStudent records:\n";
 	for (int i = 0; i < data.size(); i++) {
-		cout << "\t\t"<< data[i] << endl;
+		cout << data[i] << endl;
 	}
 	cout << "\n";
 	system("pause");

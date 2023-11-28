@@ -24,6 +24,8 @@ public:
 	void readFromFile(string& fileName);
 	//member function to display the records
 	void displayRecords();
+	//member function to insert a record
+	void insertRecord();
 
 
 	//main menu information
