@@ -46,7 +46,7 @@ double Student::getGPA() const {
 //Precondition: ostream object and a student object
 //Postcondition: returns output
 ostream& operator <<(ostream& outs, const Student& obj) {
-	outs << std::setw(4) << obj.studentID << std::setw(20) << obj.name << std::setw(20) << obj.major << std::setw(6) << obj.gpa;
+	outs <<"\t\t"<< setw(4) << obj.studentID << setw(20) << obj.name << setw(20) << obj.major << setw(6) << obj.gpa;
 	return outs;
 }
 ////Precondition: 2 student objects
