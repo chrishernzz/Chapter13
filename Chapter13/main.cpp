@@ -7,6 +7,7 @@
 #include<iostream>
 #include"input (1).h"
 #include"SortingSimulations.h"
+#include"ApplicationStudentRecords.h"
 using namespace std;
 
 //prototype
@@ -53,6 +54,6 @@ void challenge1() {
 //precondition: going to call my BTree class and create a template class that is an int
 //postcondition: going to then call my main menu information that has the options to do
 void challenge2() {
-	/*BTree<int> menu;
-	menu.mainInformation();*/
+	ApplicationStudentRecords menu;
+	menu.mainInformation();
 }
