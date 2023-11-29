@@ -50,6 +50,20 @@ void ApplicationStudentRecords::displayRecords(){
 	system("pause");
 	system("cls");
 }
+//precondition:
+//postcondition:
+void ApplicationStudentRecords::insertRecord(){
+	Student insertStudent;
+	insertStudent.setStudentID(stoi(inputString("\n\t\tEnter a new student: ", true)));
+	insertStudent.setName(inputString("\t\tEnter the student's name: ", true));
+	insertStudent.setMajor(inputString("\t\tEnter the student's major: ", true));
+	insertStudent.setGPA(inputDouble("\t\tEnter the student's GPA: ", 0.0, 4.0));
+	//push back the new student record to the  back
+	data.push_back(insertStudent);
+	cout << "\n";
+	system("pause");
+	system("cls");
+}
 
 //precondition: going to print the information
 //postcondition: going to create a menu that has options 
@@ -90,7 +104,15 @@ void ApplicationStudentRecords::mainInformation(){
 		}
 				break;
 		case 'C': {
-
+			//check if file has been open and there is data 
+			if (data.empty()) {
+				cout << "\n\t\tERROR, file has not been read for data.";
+				cout << "\n\n";
+				system("pause");
+				system("cls");
+				goto beginning;
+			}
+			insertRecord();
 		}
 				break;
 		case 'D': {

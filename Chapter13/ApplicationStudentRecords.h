@@ -8,6 +8,8 @@ using namespace std;
 //input (1) header files inputs validation
 char inputChar(string prompt, string lookup);
 int inputInteger(string prompt);
+string inputString(string prompt, bool spaces);
+double inputDouble(string prompt, double startRange, double endRange);
 
 //precondition:
 //postcondition:
