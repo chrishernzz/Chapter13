@@ -58,6 +58,7 @@ void ApplicationStudentRecords::mainInformation(){
 	char choice;
 	string readFileName = "students.dat";
 	do {
+		beginning:
 		cout << "\n\t2> Application of sorting student records";
 		cout << "\n\t" << string(82, char(205));
 		cout << "\n\t\tA> Read in data file";
@@ -77,6 +78,14 @@ void ApplicationStudentRecords::mainInformation(){
 		}
 				break;
 		case 'B': {
+			//check if file has been open and there is data 
+			if (data.empty()) {
+				cout << "\n\t\tERROR, file has not been read for data.";
+				cout << "\n\n";
+				system("pause");
+				system("cls");
+				goto beginning;
+			}
 			displayRecords();
 		}
 				break;
