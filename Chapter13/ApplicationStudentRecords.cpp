@@ -50,8 +50,8 @@ void ApplicationStudentRecords::displayRecords(){
 	system("pause");
 	system("cls");
 }
-//precondition:
-//postcondition:
+//precondition: goint to pass in the Student class
+//postcondition: going to then return a new record for a Student information that has id,name,major,gpa
 void ApplicationStudentRecords::insertRecord(){
 	Student insertStudent;
 	insertStudent.setStudentID(stoi(inputString("\n\t\tEnter a new student: ", true)));
