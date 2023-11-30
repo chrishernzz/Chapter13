@@ -198,15 +198,11 @@ void SortingSimulations::performInsertionSortDescending(int newSize, int& countS
 void SortingSimulations::performQuickSortAscending(int newSize, int& countSwaps){
 	countSwaps = 0;
 	quickSortAscending(0, newSize - 1, countSwaps);
+	cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
 }
 //precondition: going to pass in three parameters which are the low, high and the swaps to keep track
 //postcondition: going to then check if the low is less than the high if its then call the partionTheAscending() function
 void SortingSimulations::quickSortAscending(int low, int high, int& countSwaps){
-	//base case saying its sorted
-	if (low == high) {
-		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
-		return;
-	}
 	// when low is less than high
 	if (low < high){
 		// pi is the partition return index of pivot
@@ -244,15 +240,11 @@ int SortingSimulations::partionTheAscending(int low, int high, int& countSwaps){
 void SortingSimulations::performQuickSortDescending(int newSize, int& countSwaps) {
 	countSwaps = 0;
 	quickSortDescending(0, newSize - 1, countSwaps);
+	cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
 }
 //precondition:
 //postcondition:
 void SortingSimulations::quickSortDescending(int low, int high, int& countSwaps) {
-	//base case saying it's sorted
-	if (low < high) {
-		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
-		return;
-	}
 	// when low is less than high
 	if (low < high) {
 		// pi is the partition return index of pivot

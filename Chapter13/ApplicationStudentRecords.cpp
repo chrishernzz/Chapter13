@@ -1,10 +1,10 @@
 #include "ApplicationStudentRecords.h"
 
-//precondition: scope class and calling my default constructor and intializing
+//precondition: scope class and calling my default constructor and initializing
 //postcondition: going to pass in the Student class
 ApplicationStudentRecords::ApplicationStudentRecords(){
 	//call the student default constructor
-	//if there are no size avaiable there, then default
+	//if there are no size available there, then default
 	Student defualtCon;
 }
 //precondition: going to read from file
@@ -16,7 +16,7 @@ void ApplicationStudentRecords::readFromFile(string& fileName){
 	Student newStudent;
 	//open the file
 	readFile.open(fileName);
-	//while it is not the end of hte file
+	//while it is not the end of the file
 	while (!readFile.fail()) {
 		//read until there is a comma encounter
 		getline(readFile, studentId, ',');
@@ -50,17 +50,37 @@ void ApplicationStudentRecords::displayRecords(){
 	system("pause");
 	system("cls");
 }
-//precondition: goint to pass in the Student class
-//postcondition: going to then return a new record for a Student information that has id,name,major,gpa
+//precondition: going to pass in the Student class
+//postcondition: going to then return a new record for a Student information that has id,name,major,GPA
 void ApplicationStudentRecords::insertRecord(){
 	Student insertStudent;
-	insertStudent.setStudentID(stoi(inputString("\n\t\tEnter a new student: ", true)));
+	insertStudent.setStudentID(stoi(inputString("\n\t\tEnter a new student ID: ", true)));
 	insertStudent.setName(inputString("\t\tEnter the student's name: ", true));
 	insertStudent.setMajor(inputString("\t\tEnter the student's major: ", true));
 	insertStudent.setGPA(inputDouble("\t\tEnter the student's GPA: ", 0.0, 4.0));
 	//push back the new student record to the  back
 	data.push_back(insertStudent);
 	cout << "\n";
+	system("pause");
+	system("cls");
+}
+//precondition: going to pass in a parameter to compare if the student is there
+//postcondition: going to then call my getter and check if its equal to the student name, if it is then you will have to erase it (erase one only)
+void ApplicationStudentRecords::removeRecord(string studentName){
+	bool found = false;
+	for (int i = 0; i < data.size(); i++) {
+		if (data[i].getName() == studentName) {
+			data.erase(data.begin() + i);
+			//flag it to true
+			found = true;
+			cout << "\n\t\tThe student record has been removed.";
+			break;
+		}
+	}
+	if (!found) {
+		cout << "\n\t\tThe student record cannot be found to be removed.";
+	}
+	cout << "\n\n";
 	system("pause");
 	system("cls");
 }
@@ -116,7 +136,16 @@ void ApplicationStudentRecords::mainInformation(){
 		}
 				break;
 		case 'D': {
-
+			//check if file has been open and there is data 
+			if (data.empty()) {
+				cout << "\n\t\tERROR, file has not been read for data.";
+				cout << "\n\n";
+				system("pause");
+				system("cls");
+				goto beginning;
+			}
+			string studentName = inputString("\t\tEnter the student's name to remove: ", true);
+			removeRecord(studentName);
 		}
 				break;
 		case 'E': {

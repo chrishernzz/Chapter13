@@ -28,7 +28,8 @@ public:
 	void displayRecords();
 	//member function to insert a record
 	void insertRecord();
-
+	//member function to remove a record
+	void removeRecord(string studentName);
 
 	//main menu information
 	void mainInformation();
