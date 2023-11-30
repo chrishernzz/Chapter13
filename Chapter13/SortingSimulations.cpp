@@ -32,7 +32,7 @@ void SortingSimulations::orginalArray() {
 //postcondition: going to then return the data which holds the random element
 void SortingSimulations::displayArray() {
 	//will round to the first decimal place
-	cout << fixed << setprecision(1);  
+	cout << fixed << setprecision(1);
 	cout << "\n\t\t";
 	for (double i = 0; i < size; i++) {
 		cout << data[i];
@@ -145,7 +145,7 @@ void SortingSimulations::performSelectionSortDescending(int newSize, int& countS
 
 //precondition: going to pass in two parameters which are the size and the swaps to keep track
 //postcondition: going to then return the insertion sort in ascending and count the swaps (will check if the min index is smaller than the index before and if it is then keep swapping till it is smaller and not greater than the index that is next)
-void SortingSimulations::performInsertionSortAscending(int newSize, int& countSwaps){
+void SortingSimulations::performInsertionSortAscending(int newSize, int& countSwaps) {
 	//base case saying its sorted
 	if (newSize <= 1) {
 		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
@@ -165,11 +165,11 @@ void SortingSimulations::performInsertionSortAscending(int newSize, int& countSw
 		data[j + 1] = key;
 	}
 	//need to a reduced the dynamic array size by 1
-	performInsertionSortAscending(newSize - 1,countSwaps);
+	performInsertionSortAscending(newSize - 1, countSwaps);
 }
 //precondition: going to pass in two parameters which are the size and the swaps to keep track
 //postcondition: going to then return the insertion sort in ascending and count the swaps (will check if the max index is greater than the index before and if it is then keep swapping till it is greater and not smaller than the index that is next)
-void SortingSimulations::performInsertionSortDescending(int newSize, int& countSwaps){
+void SortingSimulations::performInsertionSortDescending(int newSize, int& countSwaps) {
 	//base case saying its sorted
 	if (newSize <= 1) {
 		cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
@@ -195,36 +195,36 @@ void SortingSimulations::performInsertionSortDescending(int newSize, int& countS
 
 //precondition: going to pass in two parameters which are the size and the swaps to keep track
 //postcondition: going to call my quickSortAscending() function that does the recursive
-void SortingSimulations::performQuickSortAscending(int newSize, int& countSwaps){
+void SortingSimulations::performQuickSortAscending(int newSize, int& countSwaps) {
 	countSwaps = 0;
 	quickSortAscending(0, newSize - 1, countSwaps);
 	cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
 }
 //precondition: going to pass in three parameters which are the low, high and the swaps to keep track
 //postcondition: going to then check if the low is less than the high if its then call the partionTheAscending() function
-void SortingSimulations::quickSortAscending(int low, int high, int& countSwaps){
+void SortingSimulations::quickSortAscending(int low, int high, int& countSwaps) {
 	// when low is less than high
-	if (low < high){
+	if (low < high) {
 		// pi is the partition return index of pivot
 		int pi = partionTheAscending(low, high, countSwaps);
 
 		//smaller element than pivot goes left and
 		//higher element goes right
-		quickSortAscending(low, pi - 1,countSwaps);
+		quickSortAscending(low, pi - 1, countSwaps);
 		quickSortAscending(pi + 1, high, countSwaps);
 	}
 }
 //precondition: going to pass in three parameters which are the low, high and the swaps to keep track
 //postcondition: going to get the pivot and put all the low values that are less than the pivot to the left and greater values to the right
-int SortingSimulations::partionTheAscending(int low, int high, int& countSwaps){
+int SortingSimulations::partionTheAscending(int low, int high, int& countSwaps) {
 	//choose the pivot
 	int pivot = data[high];
 	//index of smaller element and indicate
 	//the right position of pivot found so far
 	int i = (low - 1);
-	for (int j = low; j <= high; j++){
+	for (int j = low; j <= high; j++) {
 		//if current element is smaller than the pivot
-		if (data[j] < pivot){
+		if (data[j] < pivot) {
 			//increment index of smaller element
 			i++;
 			++countSwaps;
@@ -235,38 +235,39 @@ int SortingSimulations::partionTheAscending(int low, int high, int& countSwaps){
 	swap(data[i + 1], data[high]);
 	return (i + 1);
 }
-//precondition:
-//postcondition:
+//precondition: going to pass in two parameters which are the size and the swaps to keep track
+//postcondition: going to call my quickSortDescending() function that does the recursive
 void SortingSimulations::performQuickSortDescending(int newSize, int& countSwaps) {
 	countSwaps = 0;
 	quickSortDescending(0, newSize - 1, countSwaps);
 	cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
 }
-//precondition:
-//postcondition:
+//precondition: going to pass in three parameters which are the low, high and the swaps to keep track
+//postcondition: going to then check if the low is less than the high if its then call the partionTheDescending() function
 void SortingSimulations::quickSortDescending(int low, int high, int& countSwaps) {
-	// when low is less than high
-	if (low < high) {
-		// pi is the partition return index of pivot
-		int pi = partionTheDescending(low, high, countSwaps);
-
-		// smaller element than pivot goes right
-		// higher element goes left
-		quickSortDescending(low, pi - 1, countSwaps);
-		quickSortDescending(pi + 1, high, countSwaps);
+	//base case saying its sorted so do not continue the recursion
+	if (low >= high) {
+		return;
 	}
+	// pi is the partition return index of pivot
+	int pi = partionTheDescending(low, high, countSwaps);
+	// smaller element than pivot goes right and
+	// higher element goes left
+	quickSortDescending(low, pi - 1, countSwaps);
+	quickSortDescending(pi + 1, high, countSwaps);
+
 }
-//precondition:
-//postcondition:
-int SortingSimulations::partionTheDescending(int low, int high, int& countSwaps){
-	// choose the pivot
+//precondition: going to pass in three parameters which are the low, high and the swaps to keep track
+//postcondition: going to get the pivot and put all the low values that are greater than the pivot to the left and smaller values to the right
+int SortingSimulations::partionTheDescending(int low, int high, int& countSwaps) {
+	//choose the pivot
 	int pivot = data[high];
 	// index of smaller element and indicate
 	// the right position of pivot found so far
 	int i = (low - 1);
-	for (int j = low; j <= high; j++){
+	for (int j = low; j <= high - 1; j++) {
 		// if current element is greater than the pivot
-		if (data[j] > pivot){
+		if (data[j] > pivot) {
 			// increment index of smaller element
 			i++;
 			++countSwaps;

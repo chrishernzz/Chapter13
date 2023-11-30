@@ -2,6 +2,7 @@
 #include<iostream>
 #include<vector>
 #include<iomanip>
+#include<stdexcept>
 using namespace std;
 
 //input (1) header files inputs validation
