@@ -58,6 +58,15 @@ public:
 	void performMergeSortD(int begin, int end, int& countSwaps);
 	void performMergeDescending(int left, int mid, int right, int& countSwaps);
 
+	//member function to perform heap sort (ascending or descending)
+	void performHeapSortAscending(int newsIZE, int& countSwaps);
+	void heapifyAscending(int n, int i);
+	void heapSortAscending(int& countSwaps);
+
+	void performHeapSortDescending(int newsIZE, int& countSwaps);
+	void heapifyDescending(int n, int i);
+	void heapSortDescending(int& countSwaps);
+
 	//main menu information
 	void mainInformation();
 

@@ -429,6 +429,89 @@ void SortingSimulations::performMergeDescending(int left, int mid, int right, in
 	}
 }
 
+//precondition: going to pass in two parameters which are the size and the swaps to keep track
+//postcondition: going to call my heapSortAscedning() function that does the recursive
+void SortingSimulations::performHeapSortAscending(int newSize, int& countSwaps){
+	heapSortAscending(countSwaps);
+	cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
+}
+//precondition: going to pass in two parameters
+//postcondition: going to then heapify a subtree rooted with node i which will be my data and the n is the size of the heap
+void SortingSimulations::heapifyAscending(int n, int i){
+	int largest = i;
+	int l = 2 * i + 1;
+	int r = 2 * i + 2;
+	if (l < n && data[l] > data[largest]) {
+		largest = l;
+	}
+	if (r < n && data[r] > data[largest]) {
+		largest = r;
+	}
+	if (largest != i) {
+		swap(data[i], data[largest]);
+		heapifyAscending(n, largest);
+	}
+}
+//precondition: going to pass in the swaps
+//postcondition: going to be doing the heap sort here calling the heapifyAscending() function
+void SortingSimulations::heapSortAscending(int& countSwaps){
+	int n = data.size();
+	//build heap (rearrange array)
+	for (int i = n / 2 - 1; i >= 0; i--) {
+		heapifyAscending(n, i);
+	}
+	//one by one extract an element from heap
+	for (int i = n - 1; i > 0; i--) {
+		swap(data[0], data[i]);
+		//call max heapify on the reduced heap
+		heapifyAscending(i, 0);
+		//increment the swaps
+		countSwaps++;
+	}
+}
+//precondition: going to pass in two parameters which are the size and the swaps to keep track
+//postcondition: going to call my heapSortDescending() function that does the recursive
+void SortingSimulations::performHeapSortDescending(int newSize, int& countSwaps) {
+	heapSortDescending(countSwaps);
+	cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
+}
+
+//precondition: going to pass in two parameters
+//postcondition: going to then heapify a subtree rooted with node i which will be my data and the n is the size of the heap
+void SortingSimulations::heapifyDescending(int n, int i) {
+	int largest = i;
+	int l = 2 * i + 1;
+	int r = 2 * i + 2;
+	if (l < n && data[l] < data[largest]) {
+		largest = l;
+	}
+	if (r < n && data[r] < data[largest]) {
+		largest = r;
+	}
+	if (largest != i) {
+		swap(data[i], data[largest]);
+		heapifyDescending(n, largest);
+	}
+}
+
+//precondition: going to pass in the swaps
+//postcondition: going to be doing the heap sort here calling the heapifyDescending() function
+void SortingSimulations::heapSortDescending(int& countSwaps) {
+	int n = data.size();
+	//build heap (rearrange array)
+	for (int i = n / 2 - 1; i >= 0; i--) {
+		heapifyDescending(n, i);
+	}
+	//one by one extract an element from heap
+	for (int i = n - 1; i > 0; i--) {
+		swap(data[0], data[i]);
+		//call max heapify on the reduced heap
+		heapifyDescending(i, 0);
+		//increment the swaps
+		countSwaps++;
+	}
+}
+
 //precondition: going to print the information
 //postcondition: going to create a menu that has options 
 void SortingSimulations::mainInformation() {
@@ -622,7 +705,32 @@ void SortingSimulations::mainInformation() {
 		}
 				break;
 		case 'H': {
-
+			//check if the dynamic array is empty
+			if (data.empty()) {
+				cout << "\n\t\tDynamic array is empty.";
+				cout << "\n\n";
+				system("pause");
+				system("cls");
+				goto beginning;
+			}
+			int countSwaps = 0;
+			cout << "\n\t\tHeapSort:\n";
+			char orderChoice = inputChar("\n\t\tChoose sort in (A)scending or (D)escending order: ", static_cast<string>("AD"));
+			if (toupper(orderChoice) == 'A') {
+				cout << "\n\t\tAscending:\t\t";
+				performHeapSortAscending(size, countSwaps);
+			}
+			else {
+				cout << "\n\t\tDescending:\t\t";
+				performHeapSortDescending(size, countSwaps);
+			}
+			//call my displayArray() to show the ascending or descending sorted
+			displayArray();
+			//then reset the ascending or descending back to their original data which are the random elements we started with
+			orginalArray();
+			cout << "\n\n";
+			system("pause");
+			system("cls");
 		}
 				break;
 		case '0': {
