@@ -29,6 +29,8 @@ void ApplicationStudentRecords::readFromFile(string& fileName){
 		newStudent.setGPA(stod(studentGPA));
 		//push back the elements you read (getting the setters)
 		data.push_back(newStudent);
+		//this will hold a copy of the random elements 
+		realData.push_back(newStudent);
 		//end of file, then don't push_back an extra element
 		if (readFile.eof()) {
 			break;
@@ -49,16 +51,24 @@ void ApplicationStudentRecords::displayRecords(){
 	system("pause");
 	system("cls");
 }
+//precondition: going to keep track of the data
+//postcondition: going to then return the random elements we started with from when we created the size of the array elements
+void ApplicationStudentRecords::orginalArray(){
+	//set the data to realData as where realData has the elements that we first started with
+	data = realData;
+}
 //precondition: going to pass in the Student class
 //postcondition: going to then return a new record for a Student information that has id,name,major,GPA
 void ApplicationStudentRecords::insertRecord(){
 	Student insertStudent;
-	insertStudent.setStudentID(stoi(inputString("\n\t\tEnter a new student ID: ", true)));
+	insertStudent.setStudentID(inputInteger("\n\t\tEnter a new student ID: ", true));
 	insertStudent.setName(inputString("\t\tEnter the student's name: ", true));
 	insertStudent.setMajor(inputString("\t\tEnter the student's major: ", true));
 	insertStudent.setGPA(inputDouble("\t\tEnter the student's GPA: ", 0.0, 4.0));
 	//push back the new student record to the  back
 	data.push_back(insertStudent);
+	//this will hold a copy of the random elements 
+	realData.push_back(insertStudent);
 	cout << "\n";
 	system("pause");
 	system("cls");
@@ -70,6 +80,9 @@ void ApplicationStudentRecords::removeRecord(string studentName){
 	for (int i = 0; i < data.size(); i++) {
 		if (data[i].getName() == studentName) {
 			data.erase(data.begin() + i);
+			//you will then need to remove from the copy of the elements
+			//set the copy = to data since data removed it
+			realData = data;
 			//flag it to true
 			found = true;
 			cout << "\n\t\tThe student record has been removed.";
@@ -107,6 +120,30 @@ void ApplicationStudentRecords::performSelectionSortAscendingByID(int newSize){
 	}
 	//need to a reduced the dynamic array size by 1
 	performSelectionSortAscendingByID(newSize - 1);
+}
+
+void ApplicationStudentRecords::performSelectionSortDescendingByID(int newSize){
+	//base case saying it is sorted
+	if (newSize <= 1) {
+		return;
+	}
+	int minIndex;
+	for (int i = 0; i < newSize - 1; i++) {
+		//this will find the max element in the array 
+		minIndex = i;
+		for (int j = i + 1; j < newSize; j++) {
+			//changing the comparing here to get descending
+			if (data[j].getStudentID() > data[minIndex].getStudentID()) {
+				minIndex = j;
+			}
+		}
+		//swap the found max element with the first element of the index
+		if (minIndex != i) {
+			swap(data[minIndex], data[i]);
+		}
+	}
+	//need to a reduced the dynamic array size by 1
+	performSelectionSortDescendingByID(newSize - 1);
 }
 
 //precondition: going to print the information
@@ -185,51 +222,48 @@ void ApplicationStudentRecords::mainInformation(){
 			char orderChoice = inputChar("\n\t\tChoose sort in (A)scending or (D)escending order: ", static_cast<string>("AD"));
 			if (toupper(orderChoice) == 'A') {
 				char optionObjectA = inputChar("\t\tChoose by (I)-ID, (N)-name, (M)-major or (G)-GPA: ",static_cast<string>("INMG"));
+				cout << "\n\t\tAscending:\n";
 				switch (toupper(optionObjectA)) {
 				case 'I': {
-					cout << "\n\t\tAscending:\n";
 					performSelectionSortAscendingByID(data.size());
 				}
 						break;
 				case 'N': {
-					cout << "\n\t\tAscending:\n";
 
 				}
 						break;
 				case 'M': {
-					cout << "\n\t\tAscending:\n";
 				}
 						break;
 				case 'G': {
-					cout << "\n\t\tAscending:\n";
 				}
 						break;
 				}
-				//performBubbleSortAscending(size, countSwaps);
 			}
 			else {
 				char optionObjectD = inputChar("\t\tChoose by (I)-ID, (N)-name, (M)-major or (G)-GPA: ", static_cast<string>("INMG"));
+				cout << "\n\t\tDescending:\n";
 				switch (toupper(optionObjectD)) {
 				case 'I': {
-					cout << "\n\t\tDescending:\n";
+					//cout << "\n\t\tDescending:\n";
+					performSelectionSortDescendingByID(data.size());
 				}
 						break;
 				case 'N': {
-					cout << "\n\t\tDescending:\n";
 				}
 						break;
 				case 'M': {
-					cout << "\n\t\tDescending:\n";
 				}
 						break;
 				case 'G': {
-					cout << "\n\t\tDescending:\n";
 				}
 						break;
 				}
-				//performBubbleSortDescending(size, countSwaps);
 			}
+			//call my displayArray() to show the ascending or descending sorted
 			displayRecords();
+			//then reset the ascending or descending back to their original data which are the random elements we started with
+			orginalArray();
 		}
 				break;
 		case 'F': {
