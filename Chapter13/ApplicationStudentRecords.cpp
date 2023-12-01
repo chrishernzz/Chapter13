@@ -135,12 +135,12 @@ int ApplicationStudentRecords::partionTheAscendingByID(int low, int high){
 	swap(data[i + 1], data[high]);
 	return (i + 1);
 }
+
 //precondition: going to pass in one parameter which is the size
 //postcondition: going to call my quickSortDescendingByID() function that does the recursive
 void ApplicationStudentRecords::performQuickSortDescendingByID(int newSize) {
 	quickSortDescendingByID(0, newSize - 1);
 }
-
 //precondition: going to pass in two parameters which are the low and high
 //postcondition: going to then check if the low is less than the high if its then call the partionTheDescendingByID() function
 void ApplicationStudentRecords::quickSortDescendingByID(int low, int high) {
@@ -155,7 +155,6 @@ void ApplicationStudentRecords::quickSortDescendingByID(int low, int high) {
 	quickSortDescendingByID(low, pi - 1);
 	quickSortDescendingByID(pi + 1, high);
 }
-
 //precondition: going to pass in two parameters which are the low and high
 //postcondition: going to get the pivot and put all the low values that are greater than the pivot to the left and smaller values to the right
 int ApplicationStudentRecords::partionTheDescendingByID(int low, int high) {
@@ -167,6 +166,83 @@ int ApplicationStudentRecords::partionTheDescendingByID(int low, int high) {
 	for (int j = low; j <= high; j++) {
 		//if current element is greater than the pivot
 		if (data[j].getStudentID() > pivot) {
+			//increment index of smaller element
+			i++;
+			swap(data[i], data[j]);
+		}
+	}
+	swap(data[i + 1], data[high]);
+	return (i + 1);
+}
+
+//precondition: going to pass in one parameter which is the size
+//postcondition: going to call my quickSortAscendingByName() function that does the recursive
+void ApplicationStudentRecords::performQuickSortAscendingByName(int newSize){
+	quickSortAscendingByName(0, newSize - 1);
+}
+//precondition: going to pass in two parameters which are the low and high
+//postcondition: going to then check if the low is less than the high if its then call the partionTheAscendingByName() function
+void ApplicationStudentRecords::quickSortAscendingByName(int low, int high){
+	//base case saying its sorted so do not continue the recursion
+	if (low >= high) {
+		return;
+	}
+	// pi is the partition return index of pivot
+	int pi = partionTheAscendingByName(low, high);
+	// smaller element than pivot goes right and
+	// higher element goes left
+	quickSortAscendingByName(low, pi - 1);
+	quickSortAscendingByName(pi + 1, high);
+}
+//precondition: going to pass in two parameters which are the low and high
+//postcondition: going to get the pivot and put all the low values that are greater than the pivot to the left and smaller values to the right
+int ApplicationStudentRecords::partionTheAscendingByName(int low, int high){
+	//choose the pivot
+	string pivot = data[high].getName();
+	//index of smaller element and indicate
+	//the right position of pivot found so far
+	int i = (low - 1);
+	for (int j = low; j <= high; j++) {
+		//if current element is smaller than the pivot
+		if (data[j].getName() < pivot) {
+			//increment index of smaller element
+			i++;
+			swap(data[i], data[j]);
+		}
+	}
+	swap(data[i + 1], data[high]);
+	return (i + 1);
+}
+//precondition: going to pass in one parameter which is the size
+//postcondition: going to call my quickSortDescendingByName() function that does the recursive
+void ApplicationStudentRecords::performQuickSortDescendingByName(int newSize){
+	quickSortDescendingByName(0, newSize - 1);
+}
+//precondition: going to pass in two parameters which are the low and high
+//postcondition: going to then check if the low is less than the high if its then call the partionTheDescendingByName() function
+void ApplicationStudentRecords::quickSortDescendingByName(int low, int high){
+	//base case saying its sorted so do not continue the recursion
+	if (low >= high) {
+		return;
+	}
+	// pi is the partition return index of pivot
+	int pi = partionTheDescendingByName(low, high);
+	// smaller element than pivot goes right and
+	// higher element goes left
+	quickSortDescendingByName(low, pi - 1);
+	quickSortDescendingByName(pi + 1, high);
+}
+//precondition: going to pass in two parameters which are the low and high
+//postcondition: going to get the pivot and put all the low values that are greater than the pivot to the left and smaller values to the right
+int ApplicationStudentRecords::partionTheDescendingByName(int low, int high){
+	//choose the pivot
+	string pivot = data[high].getName();
+	//index of smaller element and indicate
+	//the right position of pivot found so far
+	int i = (low - 1);
+	for (int j = low; j <= high; j++) {
+		//if current element is greater than the pivot
+		if (data[j].getName() > pivot) {
 			//increment index of smaller element
 			i++;
 			swap(data[i], data[j]);
@@ -259,7 +335,7 @@ void ApplicationStudentRecords::mainInformation(){
 				}
 						break;
 				case 'N': {
-
+					performQuickSortAscendingByName(data.size());
 				}
 						break;
 				case 'M': {
@@ -279,6 +355,7 @@ void ApplicationStudentRecords::mainInformation(){
 				}
 						break;
 				case 'N': {
+					performQuickSortDescendingByName(data.size());
 				}
 						break;
 				case 'M': {

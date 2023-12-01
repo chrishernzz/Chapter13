@@ -45,6 +45,14 @@ public:
 	void quickSortDescendingByID(int low, int high);
 	int partionTheDescendingByID(int low, int high);
 
+	//member function to perform quick sort by name (ascending or descending)
+	void performQuickSortAscendingByName(int newSize);
+	void quickSortAscendingByName(int low, int high);
+	int partionTheAscendingByName(int low, int high);
+
+	void performQuickSortDescendingByName(int newSize);
+	void quickSortDescendingByName(int low, int high);
+	int partionTheDescendingByName(int low, int high);
 
 
 
