@@ -144,7 +144,7 @@ void ApplicationStudentRecords::mainInformation(){
 				system("cls");
 				goto beginning;
 			}
-			string studentName = inputString("\t\tEnter the student's name to remove: ", true);
+			string studentName = inputString("\n\t\tEnter the student's name to remove: ", true);
 			removeRecord(studentName);
 		}
 				break;
