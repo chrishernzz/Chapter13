@@ -36,14 +36,17 @@ public:
 	//member function to remove a record
 	void removeRecord(string studentName);
 
+	//member function to perform quick sort by ID (ascending or descending)
+	void performQuickSortAscendingByID(int newSize);
+	void quickSortAscendingByID(int low, int high);
+	int partionTheAscendingByID(int low, int high);
 
-	//member function to perform selection sort (ascending or descending)
-	void performSelectionSortAscendingByID(int newSize);
-	void performSelectionSortDescendingByID(int newSize);
+	void performQuickSortDescendingByID(int newSize);
+	void quickSortDescendingByID(int low, int high);
+	int partionTheDescendingByID(int low, int high);
 
-	//member function to perform selection sort by name (ascending or descending)
-	void performSelectionSortAscedningByName(int newSize);
-	void performSelectionSortDescendingByName(int newSize);
+
+
 
 	//main menu information
 	void mainInformation();

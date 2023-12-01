@@ -98,53 +98,82 @@ void ApplicationStudentRecords::removeRecord(string studentName){
 }
 
 //precondition: going to pass in one parameter which is the size
-//postcondition: going to then return the selection sort in ascending (will grab the min and the max and swap them right away. does this till sorted ascending)
-void ApplicationStudentRecords::performSelectionSortAscendingByID(int newSize){
-	//base case saying it is sorted
-	if (newSize <= 1) {
+//postcondition: going to call my quickSortAscendingByID() function that does the recursive
+void ApplicationStudentRecords::performQuickSortAscendingByID(int newSize){
+	quickSortAscendingByID(0, newSize - 1);
+}
+//precondition: going to pass in two parameters which are the low and high
+//postcondition: going to then check if the low is less than the high if its then call the partionTheAscendingByID() function
+void ApplicationStudentRecords::quickSortAscendingByID(int low, int high){
+	//base case saying its sorted so do not continue the recursion
+	if (low >= high) {
 		return;
 	}
-	int minIndex;
-	for (int i = 0; i < newSize - 1; i++) {
-		//this will find the min element in the array 
-		minIndex = i;
-		for (int j = i + 1; j < newSize; j++) {
-			if (data[j].getStudentID() < data[minIndex].getStudentID()) {
-				minIndex = j;
-			}
-		}
-		//swap the found min element with the first element of the index
-		if (minIndex != i) {
-			swap(data[minIndex], data[i]);
+	// pi is the partition return index of pivot
+	int pi = partionTheAscendingByID(low, high);
+	// smaller element than pivot goes right and
+	// higher element goes left
+	quickSortAscendingByID(low, pi - 1);
+	quickSortAscendingByID(pi + 1, high);
+}
+//precondition: going to pass in two parameters which are the low and high
+//postcondition: going to get the pivot and put all the low values that are greater than the pivot to the left and smaller values to the right
+int ApplicationStudentRecords::partionTheAscendingByID(int low, int high){
+	//choose the pivot
+	int pivot = data[high].getStudentID();
+	//index of smaller element and indicate
+	//the right position of pivot found so far
+	int i = (low - 1);
+	for (int j = low; j <= high; j++) {
+		//if current element is smaller than the pivot
+		if (data[j].getStudentID() < pivot) {
+			//increment index of smaller element
+			i++;
+			swap(data[i], data[j]);
 		}
 	}
-	//need to a reduced the dynamic array size by 1
-	performSelectionSortAscendingByID(newSize - 1);
+	swap(data[i + 1], data[high]);
+	return (i + 1);
 }
 //precondition: going to pass in one parameter which is the size
-//postcondition: going to then return the selection sort in descending (will grab the max and the min and swap them right away. does this till sorted descending)
-void ApplicationStudentRecords::performSelectionSortDescendingByID(int newSize){
-	//base case saying it is sorted
-	if (newSize <= 1) {
+//postcondition: going to call my quickSortDescendingByID() function that does the recursive
+void ApplicationStudentRecords::performQuickSortDescendingByID(int newSize) {
+	quickSortDescendingByID(0, newSize - 1);
+}
+
+//precondition: going to pass in two parameters which are the low and high
+//postcondition: going to then check if the low is less than the high if its then call the partionTheDescendingByID() function
+void ApplicationStudentRecords::quickSortDescendingByID(int low, int high) {
+	//base case saying its sorted so do not continue the recursion
+	if (low >= high) {
 		return;
 	}
-	int minIndex;
-	for (int i = 0; i < newSize - 1; i++) {
-		//this will find the max element in the array 
-		minIndex = i;
-		for (int j = i + 1; j < newSize; j++) {
-			//changing the comparing here to get descending
-			if (data[j].getStudentID() > data[minIndex].getStudentID()) {
-				minIndex = j;
-			}
-		}
-		//swap the found max element with the first element of the index
-		if (minIndex != i) {
-			swap(data[minIndex], data[i]);
+	// pi is the partition return index of pivot
+	int pi = partionTheDescendingByID(low, high);
+	// smaller element than pivot goes right and
+	// higher element goes left
+	quickSortDescendingByID(low, pi - 1);
+	quickSortDescendingByID(pi + 1, high);
+}
+
+//precondition: going to pass in two parameters which are the low and high
+//postcondition: going to get the pivot and put all the low values that are greater than the pivot to the left and smaller values to the right
+int ApplicationStudentRecords::partionTheDescendingByID(int low, int high) {
+	//choose the pivot
+	int pivot = data[high].getStudentID();
+	//index of smaller element and indicate
+	//the right position of pivot found so far
+	int i = (low - 1);
+	for (int j = low; j <= high; j++) {
+		//if current element is greater than the pivot
+		if (data[j].getStudentID() > pivot) {
+			//increment index of smaller element
+			i++;
+			swap(data[i], data[j]);
 		}
 	}
-	//need to a reduced the dynamic array size by 1
-	performSelectionSortDescendingByID(newSize - 1);
+	swap(data[i + 1], data[high]);
+	return (i + 1);
 }
 
 //precondition: going to print the information
@@ -226,7 +255,7 @@ void ApplicationStudentRecords::mainInformation(){
 				cout << "\n\t\tAscending:\n";
 				switch (toupper(optionObjectA)) {
 				case 'I': {
-					performSelectionSortAscendingByID(data.size());
+					performQuickSortAscendingByID(data.size());
 				}
 						break;
 				case 'N': {
@@ -246,8 +275,7 @@ void ApplicationStudentRecords::mainInformation(){
 				cout << "\n\t\tDescending:\n";
 				switch (toupper(optionObjectD)) {
 				case 'I': {
-					//cout << "\n\t\tDescending:\n";
-					performSelectionSortDescendingByID(data.size());
+					performQuickSortDescendingByID(data.size());
 				}
 						break;
 				case 'N': {
