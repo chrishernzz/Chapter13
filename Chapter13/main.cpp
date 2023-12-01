@@ -10,7 +10,7 @@
 #include"ApplicationStudentRecords.h"
 using namespace std;
 
-//prototype
+//prototypes
 int menuOption();
 void challenge1();
 void challenge2();
