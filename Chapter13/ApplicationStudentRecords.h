@@ -31,6 +31,13 @@ public:
 	//member function to remove a record
 	void removeRecord(string studentName);
 
+
+	//member function to perform selection sort (ascending or descending)
+	void performSelectionSortAscendingByID(int newSize);
+	void performSelectionSortDescendingByID();
+
+
+
 	//main menu information
 	void mainInformation();
 

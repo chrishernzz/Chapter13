@@ -42,7 +42,6 @@ void ApplicationStudentRecords::readFromFile(string& fileName){
 //precondition: going to make sure it displays
 //postcondition: going to then return all the information from the file, calling the data that has the information of students records
 void ApplicationStudentRecords::displayRecords(){
-	cout << "\n\t\tStudent records:\n";
 	for (int i = 0; i < data.size(); i++) {
 		cout << data[i] << endl;
 	}
@@ -85,6 +84,31 @@ void ApplicationStudentRecords::removeRecord(string studentName){
 	system("cls");
 }
 
+//precondition: going to pass in two parameters which are the size and the swaps to keep track
+//postcondition: going to then return the selection sort in ascending and count the swaps (will grab the min and the max and swap them right away. does this till sorted ascending)
+void ApplicationStudentRecords::performSelectionSortAscendingByID(int newSize){
+	//base case saying it is sorted
+	if (newSize <= 1) {
+		return;
+	}
+	int minIndex;
+	for (int i = 0; i < newSize - 1; i++) {
+		//this will find the min element in the array 
+		minIndex = i;
+		for (int j = i + 1; j < newSize; j++) {
+			if (data[j].getStudentID() < data[minIndex].getStudentID()) {
+				minIndex = j;
+			}
+		}
+		//swap the found min element with the first element of the index
+		if (minIndex != i) {
+			swap(data[minIndex], data[i]);
+		}
+	}
+	//need to a reduced the dynamic array size by 1
+	performSelectionSortAscendingByID(newSize - 1);
+}
+
 //precondition: going to print the information
 //postcondition: going to create a menu that has options 
 void ApplicationStudentRecords::mainInformation(){
@@ -120,6 +144,7 @@ void ApplicationStudentRecords::mainInformation(){
 				system("cls");
 				goto beginning;
 			}
+			cout << "\n\t\tStudent records:\n";
 			displayRecords();
 		}
 				break;
@@ -149,7 +174,62 @@ void ApplicationStudentRecords::mainInformation(){
 		}
 				break;
 		case 'E': {
+			//check if file has been open and there is data 
+			if (data.empty()) {
+				cout << "\n\t\tERROR, file has not been read for data.";
+				cout << "\n\n";
+				system("pause");
+				system("cls");
+				goto beginning;
+			}
+			char orderChoice = inputChar("\n\t\tChoose sort in (A)scending or (D)escending order: ", static_cast<string>("AD"));
+			if (toupper(orderChoice) == 'A') {
+				char optionObjectA = inputChar("\t\tChoose by (I)-ID, (N)-name, (M)-major or (G)-GPA: ",static_cast<string>("INMG"));
+				switch (toupper(optionObjectA)) {
+				case 'I': {
+					cout << "\n\t\tAscending:\n";
+					performSelectionSortAscendingByID(data.size());
+				}
+						break;
+				case 'N': {
+					cout << "\n\t\tAscending:\n";
 
+				}
+						break;
+				case 'M': {
+					cout << "\n\t\tAscending:\n";
+				}
+						break;
+				case 'G': {
+					cout << "\n\t\tAscending:\n";
+				}
+						break;
+				}
+				//performBubbleSortAscending(size, countSwaps);
+			}
+			else {
+				char optionObjectD = inputChar("\t\tChoose by (I)-ID, (N)-name, (M)-major or (G)-GPA: ", static_cast<string>("INMG"));
+				switch (toupper(optionObjectD)) {
+				case 'I': {
+					cout << "\n\t\tDescending:\n";
+				}
+						break;
+				case 'N': {
+					cout << "\n\t\tDescending:\n";
+				}
+						break;
+				case 'M': {
+					cout << "\n\t\tDescending:\n";
+				}
+						break;
+				case 'G': {
+					cout << "\n\t\tDescending:\n";
+				}
+						break;
+				}
+				//performBubbleSortDescending(size, countSwaps);
+			}
+			displayRecords();
 		}
 				break;
 		case 'F': {
