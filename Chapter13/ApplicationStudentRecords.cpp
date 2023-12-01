@@ -97,8 +97,8 @@ void ApplicationStudentRecords::removeRecord(string studentName){
 	system("cls");
 }
 
-//precondition: going to pass in two parameters which are the size and the swaps to keep track
-//postcondition: going to then return the selection sort in ascending and count the swaps (will grab the min and the max and swap them right away. does this till sorted ascending)
+//precondition: going to pass in one parameter which is the size
+//postcondition: going to then return the selection sort in ascending (will grab the min and the max and swap them right away. does this till sorted ascending)
 void ApplicationStudentRecords::performSelectionSortAscendingByID(int newSize){
 	//base case saying it is sorted
 	if (newSize <= 1) {
@@ -121,7 +121,8 @@ void ApplicationStudentRecords::performSelectionSortAscendingByID(int newSize){
 	//need to a reduced the dynamic array size by 1
 	performSelectionSortAscendingByID(newSize - 1);
 }
-
+//precondition: going to pass in one parameter which is the size
+//postcondition: going to then return the selection sort in descending (will grab the max and the min and swap them right away. does this till sorted descending)
 void ApplicationStudentRecords::performSelectionSortDescendingByID(int newSize){
 	//base case saying it is sorted
 	if (newSize <= 1) {

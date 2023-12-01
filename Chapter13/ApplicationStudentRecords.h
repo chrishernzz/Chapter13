@@ -41,7 +41,9 @@ public:
 	void performSelectionSortAscendingByID(int newSize);
 	void performSelectionSortDescendingByID(int newSize);
 
-
+	//member function to perform selection sort by name (ascending or descending)
+	void performSelectionSortAscedningByName(int newSize);
+	void performSelectionSortDescendingByName(int newSize);
 
 	//main menu information
 	void mainInformation();

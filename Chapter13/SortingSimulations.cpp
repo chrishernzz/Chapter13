@@ -279,6 +279,155 @@ int SortingSimulations::partionTheDescending(int low, int high, int& countSwaps)
 	return (i + 1);
 }
 
+//precondition: going to pass in two parameters which are the size and the swaps to keep track
+//postcondition: going to call my performMergeSortA() function that does the recursive
+void SortingSimulations::performMergeSortAscending(int newSize, int& countSwaps){
+	//base case saying its sorted
+	if (newSize <= 1) {
+		return;
+	}
+
+	countSwaps = 0;
+	performMergeSortA(0, newSize - 1, countSwaps);
+	cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
+}
+//precondition: going to pass in the begin, end , and swaps as parameters
+//postcondition: going to be doing recursive for both left and right sides as they are merging
+void SortingSimulations::performMergeSortA(int begin, int end,int& countSwaps){
+	if (begin < end) {
+		int mid = begin + (end - begin) / 2;
+
+		//doing recursive calls on the left and right halves
+		performMergeSortA(begin, mid, countSwaps);
+		performMergeSortA(mid + 1, end, countSwaps);
+
+		//call the merge function
+		performMergeAscending(begin, mid, end, countSwaps);
+	}
+}
+//precondition: going to pass four parameters which are the left, mid,right, and keep track of swaps
+//postcondition: it is going to split the array into two halves, then you sort the left and right side by merging them
+void SortingSimulations::performMergeAscending(int left, int mid, int right, int& countSwaps){
+	int const subArrayOne = mid - left + 1;
+	int const subArrayTwo = right - mid;
+	//creating temp vectors
+	vector<double> leftArray(subArrayOne);
+	vector<double> rightArray(subArrayTwo);
+
+	//copy data to temp vectors leftArray and rightArray
+	for (auto i = 0; i < subArrayOne; i++) {
+		leftArray[i] = data[left + i];
+	}
+	for (auto j = 0; j < subArrayTwo; j++) {
+		rightArray[j] = data[mid + 1 + j];
+	}
+	auto indexOfSubArrayOne = 0, indexOfSubArrayTwo = 0;
+	int indexOfMergedArray = left;
+
+	//merge the temp vectors back into array[left..right]
+	while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo) {
+		if (leftArray[indexOfSubArrayOne] <= rightArray[indexOfSubArrayTwo]) {
+			data[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
+			indexOfSubArrayOne++;
+		}
+		else {
+			data[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
+			indexOfSubArrayTwo++;
+			//increment the swaps
+			countSwaps += subArrayOne - indexOfSubArrayOne;
+		}
+		indexOfMergedArray++;
+	}
+
+	//copy the remaining elements of left[], if any
+	while (indexOfSubArrayOne < subArrayOne) {
+		data[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
+		indexOfSubArrayOne++;
+		indexOfMergedArray++;
+	}
+
+	//copy the remaining elements of right[], if any
+	while (indexOfSubArrayTwo < subArrayTwo) {
+		data[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
+		indexOfSubArrayTwo++;
+		indexOfMergedArray++;
+	}
+}
+//precondition: going to pass in two parameters which are the size and the swaps to keep track
+//postcondition: going to call my performMergeSortD() function that does the recursive
+void SortingSimulations::performMergeSortDescending(int newSize, int& countSwaps){
+	//base case saying its sorted
+	if (newSize <= 1) {
+		return;
+	}
+
+	countSwaps = 0;
+	performMergeSortD(0, newSize - 1, countSwaps);
+	cout << "\n\n\t\tnumber of swapping routines = " << countSwaps;
+}
+//precondition: going to pass in the begin, end , and swaps as parameters
+//postcondition: going to be doing recursive for both left and right sides as they are merging
+void SortingSimulations::performMergeSortD(int begin, int end, int& countSwaps){
+	if (begin < end) {
+		int mid = begin + (end - begin) / 2;
+
+		//doing recursive calls on the left and right halves
+		performMergeSortD(begin, mid, countSwaps);
+		performMergeSortD(mid + 1, end, countSwaps);
+
+		//call the merge function for descending order
+		performMergeDescending(begin, mid, end, countSwaps);
+	}
+}
+//precondition: going to pass four parameters which are the left, mid,right, and keep track of swaps
+//postcondition: it is going to split the array into two halves, then you sort the left and right side by merging them
+void SortingSimulations::performMergeDescending(int left, int mid, int right, int& countSwaps){
+	int const subArrayOne = mid - left + 1;
+	int const subArrayTwo = right - mid;
+
+	//creating temp vectors
+	vector<double> leftArray(subArrayOne);
+	vector<double> rightArray(subArrayTwo);
+
+	//copy data to temp vectors leftArray and rightArray
+	for (auto i = 0; i < subArrayOne; i++) {
+		leftArray[i] = data[left + i];
+	}
+	for (auto j = 0; j < subArrayTwo; j++) {
+		rightArray[j] = data[mid + 1 + j];
+	}
+	auto indexOfSubArrayOne = 0, indexOfSubArrayTwo = 0;
+	int indexOfMergedArray = left;
+
+	//merge the temp vectors back into array[left..right]
+	while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo) {
+		if (leftArray[indexOfSubArrayOne] >= rightArray[indexOfSubArrayTwo]) {
+			data[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
+			indexOfSubArrayOne++;
+		}
+		else {
+			data[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
+			indexOfSubArrayTwo++;
+			//increment the swaps
+			countSwaps += subArrayOne - indexOfSubArrayOne;
+		}
+		indexOfMergedArray++;
+	}
+
+	//copy the remaining elements of left[], if any
+	while (indexOfSubArrayOne < subArrayOne) {
+		data[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
+		indexOfSubArrayOne++;
+		indexOfMergedArray++;
+	}
+
+	//copy the remaining elements of right[], if any
+	while (indexOfSubArrayTwo < subArrayTwo) {
+		data[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
+		indexOfSubArrayTwo++;
+		indexOfMergedArray++;
+	}
+}
 
 //precondition: going to print the information
 //postcondition: going to create a menu that has options 
@@ -444,7 +593,32 @@ void SortingSimulations::mainInformation() {
 		}
 				break;
 		case 'G': {
-
+			//check if the dynamic array is empty
+			if (data.empty()) {
+				cout << "\n\t\tDynamic array is empty.";
+				cout << "\n\n";
+				system("pause");
+				system("cls");
+				goto beginning;
+			}
+			int countSwaps = 0;
+			cout << "\n\t\tMergeSort:\n";
+			char orderChoice = inputChar("\n\t\tChoose sort in (A)scending or (D)escending order: ", static_cast<string>("AD"));
+			if (toupper(orderChoice) == 'A') {
+				cout << "\n\t\tAscending:\t\t";
+				performMergeSortAscending(size, countSwaps);
+			}
+			else {
+				cout << "\n\t\tDescending:\t\t";
+				performMergeSortDescending(size, countSwaps);
+			}
+			//call my displayArray() to show the ascending or descending sorted
+			displayArray();
+			//then reset the ascending or descending back to their original data which are the random elements we started with
+			orginalArray();
+			cout << "\n\n";
+			system("pause");
+			system("cls");
 		}
 				break;
 		case 'H': {

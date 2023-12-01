@@ -49,6 +49,15 @@ public:
 	void quickSortDescending(int low, int high, int& countSwaps);
 	int partionTheDescending(int low, int high, int& countSwaps);
 
+	//member function to perform merge sort (ascending or descending)
+	void performMergeSortAscending(int newSize, int& countSwaps);
+	void performMergeSortA(int begin, int end,int& countSwaps);
+	void performMergeAscending(int left, int mid, int right,int& countSwaps);
+
+	void performMergeSortDescending(int newSize, int& countSwaps);
+	void performMergeSortD(int begin, int end, int& countSwaps);
+	void performMergeDescending(int left, int mid, int right, int& countSwaps);
+
 	//main menu information
 	void mainInformation();
 
