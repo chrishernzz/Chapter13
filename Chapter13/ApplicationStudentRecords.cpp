@@ -11,30 +11,23 @@ ApplicationStudentRecords::ApplicationStudentRecords(){
 //postcondition: going to then use ifstream to read, open the text, push_back the information
 void ApplicationStudentRecords::readFromFile(string& fileName){
 	ifstream readFile;
-	string theName, studentMajor, studentGPA;
-	string studentId;
+	string studentId, theName, studentMajor, studentGPA;
 	Student newStudent;
+
 	//open the file
 	readFile.open(fileName);
-	//while it is not the end of the file
-	while (!readFile.fail()) {
-		//read until there is a comma encounter
-		getline(readFile, studentId, ',');
-		newStudent.setStudentID(stoi(studentId));
-		getline(readFile, theName, ',');
-		newStudent.setName(theName);
-		getline(readFile, studentMajor, ',');
-		newStudent.setMajor(studentMajor);
-		getline(readFile, studentGPA);
-		newStudent.setGPA(stod(studentGPA));
-		//push back the elements you read (getting the setters)
-		data.push_back(newStudent);
-		//this will hold a copy of the random elements 
-		realData.push_back(newStudent);
-		//end of file, then don't push_back an extra element
-		if (readFile.eof()) {
-			break;
-		}
+
+	//read until there is a comma encounter
+	while (getline(readFile, studentId, ',')) {
+			newStudent.setStudentID(stoi(studentId));
+			getline(readFile, theName, ',');
+			newStudent.setName(theName);
+			getline(readFile, studentMajor, ',');
+			newStudent.setMajor(studentMajor);
+			getline(readFile, studentGPA);
+			newStudent.setGPA(stod(studentGPA));
+			data.push_back(newStudent);
+			realData.push_back(newStudent);
 	}
 	cout << "\n\t\tData have been read from " << fileName;
 	cout << "\n\n";
@@ -252,6 +245,181 @@ int ApplicationStudentRecords::partionTheDescendingByName(int low, int high){
 	return (i + 1);
 }
 
+//precondition: going to pass in one parameter which is the size
+//postcondition: going to call my quickSortAscendingByMajor() function that does the recursive
+void ApplicationStudentRecords::performQuickSortAscendingByMajor(int newSize){
+	quickSortAscendingByMajor(0, newSize - 1);
+}
+//precondition: going to pass in two parameters which are the low and high
+//postcondition: going to then check if the low is less than the high if its then call the partionTheAscendingByMajor() function
+void ApplicationStudentRecords::quickSortAscendingByMajor(int low, int high){
+	//base case saying its sorted so do not continue the recursion
+	if (low >= high) {
+		return;
+	}
+	// pi is the partition return index of pivot
+	int pi = partionTheAscendingByMajor(low, high);
+	// smaller element than pivot goes right and
+	// higher element goes left
+	quickSortAscendingByMajor(low, pi - 1);
+	quickSortAscendingByMajor(pi + 1, high);
+}
+//precondition: going to pass in two parameters which are the low and high
+//postcondition: going to get the pivot and put all the low values that are greater than the pivot to the left and smaller values to the right
+int ApplicationStudentRecords::partionTheAscendingByMajor(int low, int high){
+	//choose the pivot
+	string pivot = data[high].getMajor();
+	//index of smaller element and indicate
+	//the right position of pivot found so far
+	int i = (low - 1);
+	for (int j = low; j <= high; j++) {
+		//if current element is smaller than the pivot
+		if (data[j].getMajor() < pivot) {
+			//increment index of smaller element
+			i++;
+			swap(data[i], data[j]);
+		}
+	}
+	swap(data[i + 1], data[high]);
+	return (i + 1);
+}
+// precondition: going to pass in one parameter which is the size
+// postcondition: going to call my quickSortDescendingByMajor() function that does the recursive
+void ApplicationStudentRecords::performQuickSortDescendingByMajor(int newSize) {
+	quickSortDescendingByMajor(0, newSize - 1);
+}
+// precondition: going to pass in two parameters which are the low and high
+// postcondition: going to then check if the low is less than the high if it's then call the partionTheDescendingByMajor() function
+void ApplicationStudentRecords::quickSortDescendingByMajor(int low, int high) {
+	// base case saying it's sorted so do not continue the recursion
+	if (low >= high) {
+		return;
+	}
+	// pi is the partition return index of pivot
+	int pi = partionTheDescendingByMajor(low, high);
+	// smaller element than pivot goes left and
+	// higher element goes right
+	quickSortDescendingByMajor(low, pi - 1);
+	quickSortDescendingByMajor(pi + 1, high);
+}
+// precondition: going to pass in two parameters which are the low and high
+// postcondition: going to get the pivot and put all the low values that are smaller than the pivot to the left and greater values to the right
+int ApplicationStudentRecords::partionTheDescendingByMajor(int low, int high) {
+	// choose the pivot
+	string pivot = data[high].getMajor();
+	// index of smaller element and indicate
+	// the right position of pivot found so far
+	int i = (low - 1);
+	for (int j = low; j <= high; j++) {
+		// if current element is greater than the pivot
+		if (data[j].getMajor() > pivot) {
+			// increment index of smaller element
+			i++;
+			swap(data[i], data[j]);
+		}
+	}
+	swap(data[i + 1], data[high]);
+	return (i + 1);
+}
+
+//precondition: going to pass in one parameter which is the size
+//postcondition: going to call my quickSortAscendingByGPA() function that does the recursive
+void ApplicationStudentRecords::performQuickSortAscendingByGPA(int newSize){
+	quickSortAscendingByGPA(0, newSize - 1);
+}
+//precondition: going to pass in two parameters which are the low and high
+//postcondition: going to then check if the low is less than the high if its then call the partionTheAscendingByGPA() function
+void ApplicationStudentRecords::quickSortAscendingByGPA(int low, int high){
+	//base case saying its sorted so do not continue the recursion
+	if (low >= high) {
+		return;
+	}
+	// pi is the partition return index of pivot
+	int pi = partionTheAscendingByGPA(low, high);
+	// smaller element than pivot goes right and
+	// higher element goes left
+	quickSortAscendingByGPA(low, pi - 1);
+	quickSortAscendingByGPA(pi + 1, high);
+}
+//precondition: going to pass in two parameters which are the low and high
+//postcondition: going to get the pivot and put all the low values that are greater than the pivot to the left and smaller values to the right
+int ApplicationStudentRecords::partionTheAscendingByGPA(int low, int high){
+	//choose the pivot
+	double pivot = data[high].getGPA();
+	//index of smaller element and indicate
+	//the right position of pivot found so far
+	int i = (low - 1);
+	for (int j = low; j <= high; j++) {
+		//if current element is smaller than the pivot
+		if (data[j].getGPA() < pivot) {
+			//increment index of smaller element
+			i++;
+			swap(data[i], data[j]);
+		}
+	}
+	swap(data[i + 1], data[high]);
+	return (i + 1);
+}
+//precondition: going to pass in one parameter which is the size
+//postcondition: going to call my quickSortDescendingByGPA() function that does the recursive
+void ApplicationStudentRecords::performQuickSortDescendingByGPA(int newSize) {
+	quickSortDescendingByGPA(0, newSize - 1);
+}
+//precondition: going to pass in two parameters which are the low and high
+//postcondition: going to then check if the low is less than the high if its then call the partionTheDescendingByGPA() function
+void ApplicationStudentRecords::quickSortDescendingByGPA(int low, int high) {
+	//base case saying its sorted so do not continue the recursion
+	if (low >= high) {
+		return;
+	}
+	// pi is the partition return index of pivot
+	int pi = partionTheDescendingByGPA(low, high);
+	// smaller element than pivot goes left and
+	// higher element goes right
+	quickSortDescendingByGPA(low, pi - 1);
+	quickSortDescendingByGPA(pi + 1, high);
+}
+//precondition: going to pass in two parameters which are the low and high
+//postcondition: going to get the pivot and put all the low values that are smaller than the pivot to the left and greater values to the right
+int ApplicationStudentRecords::partionTheDescendingByGPA(int low, int high) {
+	//choose the pivot
+	double pivot = data[high].getGPA();
+	//index of smaller element and indicate
+	//the right position of pivot found so far
+	int i = (low - 1);
+	for (int j = low; j <= high; j++) {
+		//if current element is greater than the pivot
+		if (data[j].getGPA() > pivot) {
+			//increment index of smaller element
+			i++;
+			swap(data[i], data[j]);
+		}
+	}
+	swap(data[i + 1], data[high]);
+	return (i + 1);
+}
+
+//precondition: going to pass in a parameter that contains the file name
+//postcondition: going to then write to file (writing the student informations)
+void ApplicationStudentRecords::writeToFile(string& fileName){
+	ofstream writeFile;
+	//open the file
+	writeFile.open(fileName);
+	//iterate through the data vector and write each record to the file
+	for (int i = 0; i < data.size(); i++) {
+		//writing to the file
+		writeFile << data[i].getStudentID() << ','<< data[i].getName() << ','<< data[i].getMajor() << ','<< data[i].getGPA() << '\n';
+	}
+
+	//close file
+	writeFile.close();
+	cout << "\n\t\tData have been written to " << fileName;
+	cout << "\n\n";
+	system("pause");
+	system("cls");
+}
+
+
 //precondition: going to print the information
 //postcondition: going to create a menu that has options 
 void ApplicationStudentRecords::mainInformation(){
@@ -328,7 +496,7 @@ void ApplicationStudentRecords::mainInformation(){
 			char orderChoice = inputChar("\n\t\tChoose sort in (A)scending or (D)escending order: ", static_cast<string>("AD"));
 			if (toupper(orderChoice) == 'A') {
 				char optionObjectA = inputChar("\t\tChoose by (I)-ID, (N)-name, (M)-major or (G)-GPA: ",static_cast<string>("INMG"));
-				cout << "\n\t\tAscending:\n";
+				cout << "\n\t\tAscending order:\n";
 				switch (toupper(optionObjectA)) {
 				case 'I': {
 					performQuickSortAscendingByID(data.size());
@@ -339,16 +507,18 @@ void ApplicationStudentRecords::mainInformation(){
 				}
 						break;
 				case 'M': {
+					performQuickSortAscendingByMajor(data.size());
 				}
 						break;
 				case 'G': {
+					performQuickSortAscendingByGPA(data.size());
 				}
 						break;
 				}
 			}
 			else {
 				char optionObjectD = inputChar("\t\tChoose by (I)-ID, (N)-name, (M)-major or (G)-GPA: ", static_cast<string>("INMG"));
-				cout << "\n\t\tDescending:\n";
+				cout << "\n\t\tDescending order:\n";
 				switch (toupper(optionObjectD)) {
 				case 'I': {
 					performQuickSortDescendingByID(data.size());
@@ -359,9 +529,11 @@ void ApplicationStudentRecords::mainInformation(){
 				}
 						break;
 				case 'M': {
+					performQuickSortDescendingByMajor(data.size());
 				}
 						break;
 				case 'G': {
+					performQuickSortDescendingByGPA(data.size());
 				}
 						break;
 				}
@@ -373,7 +545,15 @@ void ApplicationStudentRecords::mainInformation(){
 		}
 				break;
 		case 'F': {
-
+			//check if file has been open and there is data 
+			if (data.empty()) {
+				cout << "\n\t\tERROR, file has not been read for data.";
+				cout << "\n\n";
+				system("pause");
+				system("cls");
+				goto beginning;
+			}
+			writeToFile(readFileName);
 		}
 				break;
 		case '0': {

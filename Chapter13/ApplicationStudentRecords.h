@@ -54,7 +54,26 @@ public:
 	void quickSortDescendingByName(int low, int high);
 	int partionTheDescendingByName(int low, int high);
 
+	//member function to perform quick sort by major (ascending or descending)
+	void performQuickSortAscendingByMajor(int newSize);
+	void quickSortAscendingByMajor(int low, int high);
+	int partionTheAscendingByMajor(int low, int high);
 
+	void performQuickSortDescendingByMajor(int newSize);
+	void quickSortDescendingByMajor(int low, int high);
+	int partionTheDescendingByMajor(int low, int high);
+
+	//member function to perform quick sort by GPA (ascending or descending)
+	void performQuickSortAscendingByGPA(int newSize);
+	void quickSortAscendingByGPA(int low, int high);
+	int partionTheAscendingByGPA(int low, int high);
+
+	void performQuickSortDescendingByGPA(int newSize);
+	void quickSortDescendingByGPA(int low, int high);
+	int partionTheDescendingByGPA(int low, int high);
+
+	//member function to write to file
+	void writeToFile(string& fileName);
 
 	//main menu information
 	void mainInformation();
