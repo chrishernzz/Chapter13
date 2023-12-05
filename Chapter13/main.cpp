@@ -34,7 +34,7 @@ int main()
 //postcondition: it will return an int (the choice of the menu)
 int menuOption() {
 	system("cls");
-	cout << "\n\tCMPR131 Chapter 13: Sortings by Christian Hernandez(11/13/2023)";
+	cout << "\n\tCMPR131 Chapter 13: Sortings by Christian Hernandez(12/4/2023)";
 	cout << "\n\t" << string(100, char(205));
 	cout << "\n\t\t1> Sorting simulations";
 	cout << "\n\t\t2> Application of students records";

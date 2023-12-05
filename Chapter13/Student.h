@@ -24,6 +24,4 @@ public:
 	double getGPA() const;
 
 	friend ostream& operator <<(ostream& outs, const Student& obj);
-	//friend bool operator !=(const Student& obj1, const Student& obj2);
-	//friend bool operator ==(const Student& obj1, const string studentName);
 };
